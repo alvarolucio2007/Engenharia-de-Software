@@ -6,7 +6,7 @@ def weighted_mean(g1,g2,g3,w1,w2,w3):   return f"The weighted mean of those numb
 def variable_switch(var_1,var_2):
     var_1=var_1-var_2 # original= a,b , target= b,a , var_1=a-b var_2=b -> a-b, b #ex: a=1, b=2 -> var_1=1-2 = -1, var_2=2
     var_2=var_2+var_1 #var_1=a-b, var_2= a-b+b=a -> a-b, a #ex: var_1=-1, var_2=-1+2 = 1 
-    var_1=-var_1+var_2 #var_1=-(a+b)+a=b , var_2=a ->b,a #ex: var_1=-()
+    var_1=-var_1+var_2 #var_1=-(a-b)+a=b , var_2=a ->b,a #ex: var_1=-(1-2)+1= 2, b=1
     return (var_1,var_2) 
 
 import math as m
