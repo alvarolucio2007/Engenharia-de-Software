@@ -15,7 +15,7 @@ def division_rest(number_1,number_2): #Retorna o resto da divisão dos 2 número
     if number_2!=0:
         return number_1%number_2
     else:
-        return ZeroDivisionError
+        raise ZeroDivisionError
 
 def is_positive_negative_zero_str(number): #Retorna se o número é 0, positivo ou negativo.
     if number!=0 and number<0:
@@ -29,7 +29,7 @@ def is_multiple(number_1,number_2): #Retorna True se o número 1 é multiplo do 
     if number_1%number_2==0 and number_2!=0:
         return True
     elif number_2==0:
-        return ZeroDivisionError
+        raise ZeroDivisionError
     else:
         return False
         
@@ -44,21 +44,21 @@ def bigger_number(number_1,number_2): #Retorna qual o número maior, e também r
 
 user_first_number=secure_input("Which is the first number would you like to compare?")
 user_second_number=secure_input("Which is the second number would you like to compare?")
-print(bigger_number_str(user_first_number,user_second_number))
+print(bigger_number(user_first_number,user_second_number))
         
 
-def double_triple_str(number): #Retorna o dobro e o triplo do número
+def double_triple(number): #Retorna o dobro e o triplo do número
     return (2*number,3*number)
 
-def before_after_str(number): #Retorna o antecessor e o sucessor do número.
+def before_after(number): #Retorna o antecessor e o sucessor do número.
     return (number-1,number+1)
 
-def rectangle_area_str(base,height): #Retorna a área do retângulo
+def rectangle_area(base,height): #Retorna a área do retângulo
     return base*height
 
-def celsius_to_fahrenheit_str(temperature): #Retorna a temperatura em Fahrenheit
+def celsius_to_fahrenheit(temperature): #Retorna a temperatura em Fahrenheit
     return (9*temperature)/5 + 32
 
 
-def simple_average_str(number_1,number_2,number_3,number_4): #Retorna a média simples sobre os 4 números.
+def simple_average(number_1,number_2,number_3,number_4): #Retorna a média simples sobre os 4 números.
     return (number_1+number_2+number_3+number_4)/4
