@@ -76,11 +76,3 @@ def research_with_graphs(age_chart,score_chart):
     general_mean=sum(score_chart)/len(score_chart)
     create_graphic(age_chart,score_chart,satisfied,unsatisfied_percentage)
     return {"Median score of satisfied clients:":satisfied,"Percentile of unsatisfied cliets:":unsatisfied_percentage,"Average mean:":general_mean}
-
-import matplotlib.pyplot as plt
-import numpy as np
-def create_graphic(age_chart,score_chart,satisfied,unsatisfied_percentage):
-   fig,axes=plt.subplots(2,2,figsize=(12,10))
-   fig.suptitle('ANÁLISE DA PESQUISA DE SATISFAÇÃO',fontsize=16,fontweight='bold')
-
-   unique,counts=
