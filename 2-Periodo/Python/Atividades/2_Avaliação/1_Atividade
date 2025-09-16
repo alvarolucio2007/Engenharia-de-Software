@@ -1,9 +1,11 @@
 #Aluno: Álvaro Lúcio Mousinho Coelho
+#Segundo Período Engenharia de Software
 #Contagem Simples
 
 def count_up(n):
     for i in range(n):
         print(i)
+
 #Tabuada
 
 def number_table(n):
