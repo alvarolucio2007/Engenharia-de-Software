@@ -5,7 +5,7 @@ def count_up(n):
         print(i)
 #Tabuada
 def number_table(n):
-    for i in range(10):
+    for i in range(11):
         print(i*n)
 
 #Soma de 1 a N
@@ -24,7 +24,7 @@ def factorial_fuction(n):
 
 #Quantidade de dígitos
 def digit_quantity(n):
-    return len(str(n))
+    return len(str(abs(n)))
 
 #Números Primos
 from math import factorial
@@ -52,31 +52,33 @@ def is_perfect(n):
 
 #Progressão Aritmética
 def gen_a_p(first,quantity,rate):
-    return [first+d*rate for d in range(quantity+1)]
+    return [first+d*rate for d in range(quantity)]
 
 #Construindo o sistema de natação
 def swimming_team_system(time_chart,name_chart):
     if min(time_chart)<0:
         raise ValueError("Please insert only positive values!")
+    if len(time_chart)!=len(name_chart):
+        raise ValueError("Please insert only in the same ")
+
     best_time=name_chart[time_chart.index(min(time_chart))]
     worst_time=name_chart[time_chart.index(max(time_chart))]
     mean_time=sum(time_chart)/len(time_chart)
-    between_12_15=sum(1 for d in time_chart if time_chart[d]>12 and time_chart[d]<15)
+    between_12_15=sum(1 for d in time_chart if 12<d<15)
     return {"Best time": best_time, "Worst time": worst_time, "Mean time": mean_time, "Quantity of swimmers between 12 and 15 seconds":between_12_15}
 #Analisar uma pesquisa de opiniões
 
 def research_with_graphs(age_chart,score_chart):
-    satisfied= [age_chart for age_chart,score_chart in zip(age_chart,score_chart) if score_chart>=4]
+    satisfied= [age for age,score_chart in zip(age_chart,score_chart) if score_chart>=4]
     mean_satisfied= sum(satisfied)/len(satisfied) if satisfied else 0
     unsatisfied= len([d for d in score_chart if d<=2])
-    unsatisfied_percentage= (unsatisfied/score_chart)*100
+    unsatisfied_percentage= (unsatisfied/len(score_chart))*100
     general_mean=sum(score_chart)/len(score_chart)
     create_graphic(age_chart,score_chart,satisfied,unsatisfied_percentage)
     return {"Median score of satisfied clients:":satisfied,"Percentile of unsatisfied cliets:":unsatisfied_percentage,"Average mean:":general_mean}
 
 import matplotlib.pyplot as plt
 import numpy as np
-
 def create_graphic(age_chart,score_chart,satisfied,unsatisfied_percentage):
    fig,axes=plt.subplots(2,2,figsize=(12,10))
    fig.suptitle('ANÁLISE DA PESQUISA DE SATISFAÇÃO',fontsize=16,fontweight='bold')
