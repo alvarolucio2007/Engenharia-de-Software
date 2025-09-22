@@ -84,9 +84,9 @@ def swimming_team_system(time_chart,name_chart):
 #Analisar uma pesquisa de opiniões
 
 def research_with_graphs(age_chart,score_chart):
-    satisfied= [age for age,score_chart in zip(age_chart,score_chart) if score_chart>=4]
-    mean_satisfied= sum(satisfied)/len(satisfied) if satisfied else 0
+    satisfied_scores= [score for age, score in zip(age_chart,score_chart) if score_chart>=4]
+    mean_satisfied= sum(satisfied_scores)/len(satisfied_scores) if satisfied_scores else 0
     unsatisfied= len([d for d in score_chart if d<=2])
     unsatisfied_percentage= (unsatisfied/len(score_chart))*100
     general_mean=sum(score_chart)/len(score_chart)
-    return {"Median score of satisfied clients:":mean_satisfied,"Percentile of unsatisfied cliets:":unsatisfied_percentage,"Average mean:":general_mean}
+    return {"Median score of satisfied clients:":mean_satisfied,"Percentage of unsatisfied cliets:":unsatisfied_percentage,"Average mean:":general_mean}
