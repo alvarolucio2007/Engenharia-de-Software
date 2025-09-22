@@ -89,4 +89,4 @@ def research_with_graphs(age_chart,score_chart):
     unsatisfied= len([d for d in score_chart if d<=2])
     unsatisfied_percentage= (unsatisfied/len(score_chart))*100
     general_mean=sum(score_chart)/len(score_chart)
-    return {"Median score of satisfied clients:":satisfied,"Percentile of unsatisfied cliets:":unsatisfied_percentage,"Average mean:":general_mean}
+    return {"Median score of satisfied clients:":mean_satisfied,"Percentile of unsatisfied cliets:":unsatisfied_percentage,"Average mean:":general_mean}
