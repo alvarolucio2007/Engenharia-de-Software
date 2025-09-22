@@ -73,7 +73,7 @@ def swimming_team_system(time_chart,name_chart):
     if min(time_chart)<0:
         raise ValueError("Please insert only positive values!")
     if len(time_chart)!=len(name_chart):
-        raise ValueError("Please insert only in the same ")
+        raise ValueError("Please insert only the same length!")
 
     best_time=name_chart[time_chart.index(min(time_chart))]
     worst_time=name_chart[time_chart.index(max(time_chart))]
