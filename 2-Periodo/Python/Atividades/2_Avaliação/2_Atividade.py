@@ -1,4 +1,4 @@
-#Aluno: Álvaro Lúcio Mousinho Coelho
+#Aluno: Álvaro Lúcio Mousinho Coelho 22/09/2025
 
 #Exercício 1:  Criar e Imprimir uma lista de compras
 
