@@ -60,8 +60,6 @@ def fib(n): #Fórmula de Binet
         fib_array.append(round((1/sqrt5)*(((phi)**i)-(psi**i))))
     return fib_array
 
-print(fib(1447))
-
 #Números Perfeitos
 def is_perfect(n):
     return (sum(d for d in range(1,n) if n%d==0)==n)
