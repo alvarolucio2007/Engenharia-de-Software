@@ -57,13 +57,6 @@ def fib(n): #Fórmula de Binet
     psi=(1-sqrt5)/2
     return round((1/sqrt5)*(((phi)**n)-(psi**n)))
 
-
-def fib2(n):
-    a,b=0,1
-    for _ in range(n):
-        a,b=b,a+b
-    return a
-print(fib2(10)==fib(10))
 #Números Perfeitos
 def is_perfect(n):
     return (sum(d for d in range(1,n) if n%d==0)==n)
