@@ -8,3 +8,9 @@ shopping_list.append("Leite")
 shopping_list.append("Ovos")
 shopping_list.append("Frutas")
 print(shopping_list)
+
+#Exercício 2: Criar um dicionário, com título, ano e diretor
+
+filme={"Título": ["Harry Potter","Titanic"], "Ano": 2001, "Diretor": "Didi"}
+filme["Título"].append("Teste")
+print(filme["Título"])
