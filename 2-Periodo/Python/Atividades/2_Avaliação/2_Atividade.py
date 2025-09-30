@@ -47,17 +47,42 @@ def exercise_8(list_):
     return(list_sorted[0],list_sorted[-1])
 
 #Exercício 9:
-def exercise_9(dict_): #TODO: adicionar funcionalidade de pesquisar itens.
-    product=""
-    dict_={}
-    while product!="exit":
-        product=input("Which product would you like to add? (type exit to exit)")
+def exercise_9(dict_): 
+    while True:
+        while True:
+            answer=input("Would you like to use the program? (y/n)")
+            if answer.lower()=="y":
+                break
+            elif answer.lower()=="n":
+                return dict_
         try:
-            price=float(input("What is it's price?"))
-            dict_[product]=price
+            while True:
+                choice=int(input("Please choose whether you want to check or add something to the dictionary! (1=check, 2=add)"))
+                if choice in [1,2]:
+                    break
         except ValueError:
-            print("Please only insert numbers!")
-    return dict_
+            print("Error! Please insert only numbers!")
+        if choice==1:
+            while True:
+                try:
+                    product=input("Which product would you like to check? (type exit to exit)")
+                    if product.lower()=="exit":
+                        break
+                    print(dict_[str(product)])
+                except KeyError:
+                    print("Please insert a valid product!")
+        else:
+            while True:
+                product=input("Which product would you like to add? (type exit to exit)")
+                if product.lower()=="exit":
+                    break
+                try:
+                    price=float(input("What is it's price?"))
+                except ValueError:
+                    print("Please insert only valid numbers!")
+                dict_[product]=price
 
+exercise_9({})
 #Exercício 10:
-def exe
+def exe():
+    pass
