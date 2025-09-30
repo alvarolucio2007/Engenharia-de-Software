@@ -68,7 +68,7 @@ def exercise_9(dict_):
                     product=input("Which product would you like to check? (type exit to exit)")
                     if product.lower()=="exit":
                         break
-                    print(dict_[str(product)])
+                    print(dict_[product])
                 except KeyError:
                     print("Please insert a valid product!")
         else:
@@ -76,13 +76,24 @@ def exercise_9(dict_):
                 product=input("Which product would you like to add? (type exit to exit)")
                 if product.lower()=="exit":
                     break
-                try:
-                    price=float(input("What is it's price?"))
-                except ValueError:
-                    print("Please insert only valid numbers!")
+                while True:
+                    try:
+                        price=float(input("What is its price?"))
+                        if price <= 0:
+                            print("Please insert positive values!")
+                            continue
+                        break
+                    except ValueError:
+                        print("Please insert only valid numbers!")
                 dict_[product]=price
 
-exercise_9({})
 #Exercício 10:
-def exe():
-    pass
+def exercicio_10(lista):
+    dict_ = {}
+    for key, value in lista:
+        if key in dict_:
+            dict_[key] += value
+        else:
+            dict_[key] = value
+    return dict_
+print(exercicio_10([(12,2),(13,2),(12,3)]))
