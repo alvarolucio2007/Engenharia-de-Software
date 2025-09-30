@@ -25,8 +25,39 @@ def exercise_3(movie):
 #Exercício 4:
 def exercise_4(list_):
     return set(list_)
-print(exercise_4([1,2,2,3,4,4,5,1]))
+
 
 #Exercício 5:
 def exercise_5(list_of_dicts):
-    
+    return [list_of_dicts[d]["Name"] for d in range(len(list_of_dicts)) if list_of_dicts[d]["Score"]>=7]
+
+#Exercício 6:
+from collections import Counter
+def exercise_6(phrase):
+    return Counter(phrase)
+
+#Exercício 7:
+def exercise_7(work_friends,uni_friends):
+    work_friends_set,uni_friends_set=set(work_friends),set(uni_friends)
+    return [(work_friends_set | uni_friends_set) , (work_friends_set & uni_friends_set) , (work_friends_set - uni_friends_set)]
+
+#Exercício 8:
+def exercise_8(list_):
+    list_sorted=sorted(list_)
+    return(list_sorted[0],list_sorted[-1])
+
+#Exercício 9:
+def exercise_9(dict_): #TODO: adicionar funcionalidade de pesquisar itens.
+    product=""
+    dict_={}
+    while product!="exit":
+        product=input("Which product would you like to add? (type exit to exit)")
+        try:
+            price=float(input("What is it's price?"))
+            dict_[product]=price
+        except ValueError:
+            print("Please only insert numbers!")
+    return dict_
+
+#Exercício 10:
+def exe
