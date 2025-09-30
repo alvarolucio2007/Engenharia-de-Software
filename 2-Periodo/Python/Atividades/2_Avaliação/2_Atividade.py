@@ -97,4 +97,5 @@ def exercicio_10(list_):
             dict_[key] = value
     return dict_
 
-def exercicio_11()
+def exercicio_11():
+    pass
