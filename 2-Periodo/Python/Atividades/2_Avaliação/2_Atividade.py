@@ -88,12 +88,13 @@ def exercise_9(dict_):
                 dict_[product]=price
 
 #Exercício 10:
-def exercicio_10(lista):
+def exercicio_10(list_):
     dict_ = {}
-    for key, value in lista:
+    for key, value in list_:
         if key in dict_:
             dict_[key] += value
         else:
             dict_[key] = value
     return dict_
-print(exercicio_10([(12,2),(13,2),(12,3)]))
+
+def exercicio_11()
