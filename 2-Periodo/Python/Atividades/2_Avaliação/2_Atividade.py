@@ -26,3 +26,7 @@ def exercise_3(movie):
 def exercise_4(list_):
     return set(list_)
 print(exercise_4([1,2,2,3,4,4,5,1]))
+
+#Exercício 5:
+def exercise_5(list_of_dicts):
+    
