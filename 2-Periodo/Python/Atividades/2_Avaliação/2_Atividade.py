@@ -105,12 +105,15 @@ def exercicio_10(list_):
 def exercicio_13(list_):
     seen=[]
     set_list_=set(list_)
-    counter_list_=Counter(list_)
-    for i in range(len(counter_list_)):
-        if counter_list_[i]>1:
-            seen.append(counter_list_[i])
+    for _ in range(len(list_)):
+        list_indexes=[i for i, v in enumerate(list_) if v==list_[_]]
+        if len(list_indexes)>1:
+            seen.append(list_[_])
     return (set_list_,seen)
+
+print(exercicio_13(['200.135.80.9', '192.168.1.1', '200.135.80.9', '192.168.1.1', '202.45.12.3']))
 
 #Exercício 14: Um Set de Dicionários, sendo cada dicionário um livro em específico, com atributos como "ISBN","Título","Autor" e "Publicação", sendo complexidade O(1*1)=O(1)
 
-def exercicio_14()
+def exercicio_14():
+    pass
