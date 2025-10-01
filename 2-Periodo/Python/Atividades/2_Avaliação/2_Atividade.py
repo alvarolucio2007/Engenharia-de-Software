@@ -103,17 +103,34 @@ def exercicio_10(list_):
 
 #Exercício 13: Um Set, que descarta todas as repetições, sendo extremamente eficiente.
 def exercicio_13(list_):
-    seen=[]
+    freq=Counter(list_)
     set_list_=set(list_)
-    for _ in range(len(list_)):
-        list_indexes=[i for i, v in enumerate(list_) if v==list_[_]]
-        if len(list_indexes)>1:
-            seen.append(list_[_])
+    seen={x for x,c in freq.items() if c>1}
     return (set_list_,seen)
 
 print(exercicio_13(['200.135.80.9', '192.168.1.1', '200.135.80.9', '192.168.1.1', '202.45.12.3']))
 
 #Exercício 14: Um Set de Dicionários, sendo cada dicionário um livro em específico, com atributos como "ISBN","Título","Autor" e "Publicação", sendo complexidade O(1*1)=O(1)
 
-def exercicio_14():
-    pass
+def exercicio_14(list_): #TODO: fazer funcionar
+    while True:
+        user_answer=input("Would you like to use this program? (y/n)")
+        if user_answer not in ["y","n"]:
+            print("Please only use valid answers!")
+        if user_answer=="n":
+            break
+        else:
+            while True:
+                user_book_search=input("What book would you like to search by name?")
+                for key,value in list_:
+                    if user_book_search in key:
+                        print(f"The book {user_book_search} is in the list, with {value} copies!")
+                    else:
+                        print(f"The book {user_book_search} is not on the list.")
+                user_book_answer=input("Would you like to continue to search for another book? (y/n)")
+                if user_book_answer not in ["y","n"]:
+                    print("Please insert only 'y' or 'n'!")
+                if user_book_answer=="n":
+                    break
+
+print(exercicio_14([{"Nome": "João", "Quantidade": 3},{"Nome": "Maria", "Quantidade":1}]))
