@@ -83,7 +83,7 @@ def swimming_team_system(time_chart,name_chart):
 def research_with_graphs(age_chart,score_chart):
     satisfied_scores= [score for age, score in zip(age_chart,score_chart) if score>=4]
     mean_satisfied= sum(satisfied_scores)/len(satisfied_scores) if satisfied_scores else 0
-    unsatisfied= len([d for d in score_chart if d<=2]) #Teste!!!!!!!!!
+    unsatisfied= len([d for d in score_chart if d<=2]) 
     unsatisfied_percentage= (unsatisfied/len(score_chart))*100
     general_mean=sum(score_chart)/len(score_chart)
     return {"Mean score of satisfied clients:":mean_satisfied,"Percentage of unsatisfied clients:":unsatisfied_percentage,"Average mean:":general_mean}
