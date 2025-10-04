@@ -1,0 +1,28 @@
+{
+  "perguntas": {
+    "1": {
+      "texto": "Você está fazendo um trabalho em grupo\n e um colega não fez a parte dele, faltando poucas horas para o prazo final.",
+      "respostas": {
+        "Fazer a parte dele às \npressas, sem dizer nada,\n e sentir muita\n raiva por dentro.": { "lv": 0, "hp": -3, "prox_q": null },
+        "Ligar para o colega,\n dizer de forma calma e\n firme que ele precisa \nterminar a parte dele agora\n e oferecer ajuda para o\n que for necessário.": { "lv": 2, "hp": 1, "prox_q": null },
+        "Mandar uma mensagem agressiva\n no grupo, dizendo que ele\n é irresponsável e ameaçando\n tirá-lo do trabalho.": { "lv": 1, "hp": -2, "prox_q": null }
+      }
+    },
+    "2": {
+      "texto": "Seus companheiros de equipe estão desorientados\n e não têm noção do que fazer no projeto.",
+      "respostas": {
+        "Se desesperar e não procurar\n uma solução plausível.": { "lv": 2, "hp": -2, "prox_q": null },
+        "Ignorar o time e esperar\n pelo que for decidido\n por todos.": { "lv": -1, "hp": -1, "prox_q": null },
+        "Liderar e orientar o time.": { "lv": 0, "hp": -2, "prox_q": null }
+      }
+    },
+    "3": {
+      "texto": "Sua gerente chega à reunião muito abalada e acaba se perdendo\n algumas vezes em seu discurso, que você sabe complementar.",
+      "respostas": {
+        "Falar no meio da reunião\n que o discurso está\n péssimo e tomar a frente.": { "lv": 2, "hp": -2, "prox_q": null },
+        "Auxiliar às vezes,\n mas interrompendo a fala\n sem aviso ou sinal de\n confusão da gerente.": { "lv": -1, "hp": -1, "prox_q": null },
+        "Auxiliar somente quando\n a gerente demonstrar confusão\n e após a reunião \nse disponibilizar \npara um diálogo amigável.": { "lv": 0, "hp": 0, "prox_q": null }
+      }
+    }
+  }
+}
