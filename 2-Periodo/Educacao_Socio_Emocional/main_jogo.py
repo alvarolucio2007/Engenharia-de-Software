@@ -1,4 +1,4 @@
 
-import customtkinter as ctk #importar o q faz janelas
+import customtkinter as ctk
 janela=ctk.CTk()
 janela.mainloop()
