@@ -1,0 +1,10 @@
+# VSCode
+.vscode/
+# IDEs
+.idea/
+# Caches do navegador
+.cache/
+# Logs e arquivos temporários
+*.log
+*.db
+
