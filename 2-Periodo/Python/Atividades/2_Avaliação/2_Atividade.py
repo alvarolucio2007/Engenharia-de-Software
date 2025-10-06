@@ -132,5 +132,4 @@ def exercicio_14(list_): #TODO: fazer funcionar
                     print("Please insert only 'y' or 'n'!")
                 if user_book_answer=="n":
                     break
-
 print(exercicio_14([{"Nome": "João", "Quantidade": 3},{"Nome": "Maria", "Quantidade":1}]))   
