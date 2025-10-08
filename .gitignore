@@ -7,4 +7,6 @@
 # Logs e arquivos temporários
 *.log
 *.db
-
+ 
+ ./venv
+ 
