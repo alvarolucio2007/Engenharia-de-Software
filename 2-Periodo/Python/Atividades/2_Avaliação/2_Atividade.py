@@ -122,14 +122,14 @@ def exercicio_14(list_): #TODO: fazer funcionar
         else:
             while True:
                 user_book_search=input("What book would you like to search by name?")
-                for key,value in list_:
-                    if user_book_search in key:
-                        print(f"The book {user_book_search} is in the list, with {value} copies!")
-                    else:
-                        print(f"The book {user_book_search} is not on the list.")
-                user_book_answer=input("Would you like to continue to search for another book? (y/n)")
-                if user_book_answer not in ["y","n"]:
-                    print("Please insert only 'y' or 'n'!")
-                if user_book_answer=="n":
-                    break
-print(exercicio_14([{"Nome": "João", "Quantidade": 3},{"Nome": "Maria", "Quantidade":1}]))
+                for i in range(len(list_)):
+                    for key,value in list_[i]:
+                        if user_book_search in key:
+                            print(f"The book {user_book_search} is in the list, with {value} copies!")
+                        else:
+                            print(f"The book {user_book_search} is not on the list.")
+                    user_book_answer=input("Would you like to continue to search for another book? (y/n)")
+                    if user_book_answer not in ["y","n"]:
+                        print("Please insert only 'y' or 'n'!")
+                    if user_book_answer=="n":
+                        break   
