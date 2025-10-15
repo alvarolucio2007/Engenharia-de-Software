@@ -85,7 +85,7 @@ def exer_13(list_,tuple_):
 
 #15° Exercício: IndexError 
 def exer_15(list_):
-    return list_[len(list_)+1] #Gerará ValueError
+    return list_[len(list_)+1] #Gerará IndexError
 
 #16° Exercício: Com o método del[chave]
 def exer_16(dict_):
