@@ -12,7 +12,6 @@ def exer_2(tuple_):
         list_tuple_.append(2*values)
     return tuple(list_tuple_)
 
-print(exer_2((1,2,3,4,5)))
 def exer_2_curto(tuple_):
     return tuple(v*2 for v in tuple_)
 
@@ -24,6 +23,7 @@ def exer_3(dict_):
             frutas_vermelhas.append(keys)
     return frutas_vermelhas
 
+print(exer_3({"Banana":"Amarela","Maçã":"Vermelha"}))
 def exer_3_curto(dict_):
     return [k for k,v in dict_.items() if v.lower()=="vermelho" or v.lower()=="vermelha"]
 #4° Exercício:
@@ -157,3 +157,27 @@ def exer_29(set_):
     set_.add("d")
     set_.add("e")
     return set_
+
+
+def exer_prova():
+    caminhao=[]
+    while True:
+        sair=input("Deseja adicionar um item ao caminhão? (s/n): ").lower()
+        if sair=="n":
+            break
+        while True:
+            try:
+                item=float(input("Digite o peso do item a ser adicionado (kg): "))
+                break
+            except ValueError:
+                print("Valor inválido. Por favor, insira um número.")
+        if item+sum(caminhao)<=1000:
+            caminhao.append(item)
+            print(f"Item de {item} kg adicionado ao caminhão.")
+        else:
+            print("Capacidade máxima do caminhão atingida. Não é possível adicionar mais itens.")
+            break
+    print(f"Peso total no caminhão: {sum(caminhao)} kg, peso restante: {1000 - sum(caminhao)} kg")
+    print(f"Itens no caminhão: {caminhao}")
+    return caminhao
+exer_prova()
