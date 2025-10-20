@@ -12,6 +12,7 @@ def exer_2(tuple_):
         list_tuple_.append(2*values)
     return tuple(list_tuple_)
 
+print(exer_2((1,2,3,4,5)))
 def exer_2_curto(tuple_):
     return tuple(v*2 for v in tuple_)
 
@@ -120,7 +121,7 @@ def exer_21():
 #24° Exercício: Não se pode editar tuplas.
 def exer_24_errado():
     tuple_=(1,2,3)
-    tuple_(0)=5 #Gerar-se-á erro
+    #tuple_(0)=5 #Gerar-se-á erro
 
 def exer_24_certo():
     tuple_,list_tuple_=(1,2,3),list(tuple_)
