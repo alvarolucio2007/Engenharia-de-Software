@@ -16,10 +16,12 @@ def calcular_imc(peso,altura):
     else:
         return f"Obesidade III (mórbida)! IMC={imc}"
 
+#Conversor de temperatura bem simples de C pra F
 def converter_temperatura(celsius):
     return (celsius *1.8)+32
 print(converter_temperatura(25))
 
+#Verificação de números primos pythonico.
 def verificar_primo(numero):
     return not any(x for x in range(2,numero) if numero%x==0)
 print(verificar_primo(2))
