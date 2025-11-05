@@ -1,7 +1,8 @@
+from typing import Union
 #Questão 1: Calculadora de IMC
-def calcular_imc(peso,altura):
+def calcular_imc(peso:Union[float,int],altura:Union[float,int]) -> str:
     imc=peso/altura**2
-    if imc<=18.5:
+    if imc<=17:
         return f"Muito abaixo do peso! IMC= {imc:.2f}"
     elif imc<=18.49:
         return f"Abaixo do peso! IMC={imc:.2f}"
@@ -16,13 +17,14 @@ def calcular_imc(peso,altura):
     else:
         return f"Obesidade III (mórbida)! IMC={imc:.2f}"
 
+print(calcular_imc(70.5,1.5))
 #Conversor de temperatura bem simples de C pra F
-def converter_temperatura(celsius):
-    return (celsius *1.8)+32
+def converter_temperatura(celsius: float) -> float:
+    return (celsius * 1.8) + 32
 print(converter_temperatura(25))
 
 #Verificação de números primos pythonico.
-def verificar_primo(numero):
+def verificar_primo(numero:int) -> bool:
     if numero<0:
         return  "Números negativos não podem ser aceitos!"
     elif numero==0 or numero==1:
