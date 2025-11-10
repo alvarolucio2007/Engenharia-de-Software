@@ -1,6 +1,5 @@
-from typing import Union
 #Questão 1: Calculadora de IMC
-def calcular_imc(peso:Union[float,int],altura:Union[float,int]) -> str:
+def calcular_imc(peso:float | int ,altura: float | int) -> str:
     imc=peso/altura**2
     if imc<=17:
         return f"Muito abaixo do peso! IMC= {imc:.2f}"
@@ -24,9 +23,9 @@ def converter_temperatura(celsius: float) -> float:
 print(converter_temperatura(25))
 
 #Verificação de números primos pythonico.
-def verificar_primo(numero:int) -> bool:
+def verificar_primo(numero:int) -> bool | str:
     if numero<0:
-        return  "Números negativos não podem ser aceitos!"
+        return "Números negativos não podem ser aceitos!"
     elif numero==0 or numero==1:
         return False
     import math

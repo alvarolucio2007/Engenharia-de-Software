@@ -1,6 +1,6 @@
 #Primeiro exercício: Função para recerber um nome e retornar uma saudação personalizada.
 def exercicio_1(nome,saudacao):
-    return f"{saudacao}, {nome}!" if type(nome)==str and type(saudacao)==str and len(nome)>0 and len(saudacao)>0 else "Erro! Por favor, tente novamente com nomes válidos!"
+    return f"{saudacao}, {nome}!" if type(nome) is str and type(saudacao) is str and len(nome)>0 and len(saudacao)>0 else "Erro! Por favor, tente novamente com nomes válidos!"
 
 #Segundo exercício: Calculadora para somar, subtrair, multiplicar e dividir 2 números.
 def exercicio_2(num_1,num_2, op): #TODO: fazer mais personalizável ao usuário

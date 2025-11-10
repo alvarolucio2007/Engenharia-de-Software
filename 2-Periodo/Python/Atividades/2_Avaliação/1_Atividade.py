@@ -1,6 +1,7 @@
 #Aluno: Álvaro Lúcio Mousinho Coelho
 #Segundo Período Engenharia de Software
 #Contagem Simples
+from math import factorial, sqrt
 
 def count_up(n):
     for i in range(n):
@@ -38,7 +39,7 @@ def digit_quantity(n):
 
 #Números Primos
 
-from math import factorial
+
 def is_prime_fancy(n):
     return (factorial(n-1)+1)%n==0
 
@@ -49,13 +50,13 @@ def is_prime_normal(n):
 
 #Sequencia de Fibonacci
 
-from math import sqrt
+
 
 def fib(n): #Fórmula de Binet
     sqrt5=sqrt(5)
     phi=(1+sqrt5)/2
     psi=(1-sqrt5)/2
-    return round((1/sqrt5)*(((phi)**n)-(psi**n)))
+    return round((1/sqrt(5))*(((phi)**n)-(psi**n)))
 
 #Números Perfeitos
 def is_perfect(n):
