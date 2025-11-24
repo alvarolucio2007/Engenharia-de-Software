@@ -121,3 +121,39 @@ def decima_questao(email:str) -> None:
         print("Erro interno, tente novamente.")
     finally:
         print("Validação Concluída")
+
+# 11) nome,idade e salário, validar cada e etc.
+def dec_primeira_questao(nome:str,idade:int,salario:float) -> None:
+    try:
+        if not isinstance(nome,str) or not nome:
+            raise ValueError("Nome não é string, ou nome não dado!")
+        if not isinstance(idade,int) or not idade or idade<0:
+            raise ValueError("Idade não é int, ou idade não dada, ou idade é menor que 0!")
+        if not isinstance(salario,float) or not salario or salario<0:
+            raise ValueError("Salário não é float, ou salário não dado, ou salário é menor que 0!")
+        print(f"Nome: {nome} \n Idade: {idade} \n Salário: {salario}")
+    except Exception:
+        print("Erro interno, tente novamente")
+    finally:
+        print("Programa concluído.")
+
+# 12) Calculadora, já feito kk
+# 13) Validação de senha: conter no minimo uma maiuscula, uma minuscula e um número
+
+def dec_terceira_questao(senha:str) -> bool|None:
+    try:
+        if len(senha)<8:
+            raise ValueError("Senha precisa ter no mínimo 8 caracteres!")
+        if not any(d for d in senha if d.isupper()):
+            raise ValueError("Senha precisa ter no mínimo uma maiúscula!")
+        if not any(d for d in senha if d.islower()):
+            raise ValueError("Senha precisa ter no mínimo uma minúscula!")
+        if not any(d for d in senha if d.isdigit()):
+            raise ValueError("Senha precisa ter no mínimo um dígito!")
+        return True
+    except Exception:
+        print("Erro interno! Tente novamente.")
+    finally:
+        print("Finalizando programa...")
+
+print(dec_terceira_questao("1234567890"))
