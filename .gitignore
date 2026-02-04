@@ -220,4 +220,4 @@ venv.bak/
 .vscode
 
 # Java
-.class
+*.class
