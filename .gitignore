@@ -218,3 +218,6 @@ venv.bak/
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 
 .vscode
+
+# Java
+.class
