@@ -1,0 +1,12 @@
+services:
+  db-postgres:
+    image: postgres:latest
+    container_name: postgres_faculdade
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: senha_segura
+      POSTGRES_DB: biblioteca
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/ # Os dados ficam salvos na pasta pgdata local
