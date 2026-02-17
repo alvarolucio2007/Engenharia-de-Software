@@ -26,7 +26,9 @@ public class AtividadeUm {
           System.out.println("Por favor, insira o valor que quiser retirar! (Tem que ser menor que o saldo.)");
           double remover;
           remover = scanner.nextDouble();
-          if (remover <= saldo) {
+          if (remover <= 0) {
+            System.out.println("Não é possível sacar saldos negativos!");
+          } else if (remover <= saldo) {
             saldo -= remover;
           } else {
             System.out.println("Saldo insuficiente!");
@@ -37,7 +39,7 @@ public class AtividadeUm {
           System.out.println("Obrigado por ter saido do sistema, saindo...");
           break;
         default:
-          System.out.println("Por favor, insira apenas de 1 a 4");
+          System.out.println("Opção Inválida!");
           break;
       }
     } while (opcao != 4);
