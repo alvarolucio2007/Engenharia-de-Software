@@ -14,6 +14,14 @@ class Semaforo {
       cor = "vermelho";
     }
   }
+
+  public String getCor() {
+    return cor;
+  }
+
+  public void setCor(String cor) {
+    this.cor = cor;
+  }
 }
 
 class Veiculo {
@@ -22,6 +30,25 @@ class Veiculo {
 
   public Veiculo(String placa) {
     this.placa = placa;
+  }
+
+  public String getPlaca() {
+    return placa;
+  }
+
+  public void setPlaca(String placa) {
+    this.placa = placa;
+  }
+
+  public String getTipo() {
+    return tipo;
+  }
+
+  public void setTipo(String tipo) {
+    this.tipo = tipo;
+  }
+
+  public Veiculo() {
   }
 
 }
@@ -34,6 +61,22 @@ class Via {
     this.nome = nome;
     this.fluxoVeiculos = fluxoVeiculos;
   }
+
+  public String getNome() {
+    return nome;
+  }
+
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
+
+  public boolean isFluxoVeiculos() {
+    return fluxoVeiculos;
+  }
+
+  public void setFluxoVeiculos(boolean fluxoVeiculos) {
+    this.fluxoVeiculos = fluxoVeiculos;
+  }
 }
 
 class SensorPassagem {
@@ -43,6 +86,22 @@ class SensorPassagem {
   public SensorPassagem(int id, boolean estaAtivado) {
     this.estaAtivado = estaAtivado;
     this.id = id;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public boolean isEstaAtivado() {
+    return estaAtivado;
+  }
+
+  public void setEstaAtivado(boolean estaAtivado) {
+    this.estaAtivado = estaAtivado;
   }
 
 }

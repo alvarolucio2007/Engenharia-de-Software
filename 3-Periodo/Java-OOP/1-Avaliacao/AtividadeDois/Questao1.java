@@ -23,6 +23,30 @@ class Video {
     System.out.println(estaDandoPlay);
   }
 
+  public String getTitulo() {
+    return titulo;
+  }
+
+  public void setTitulo(String titulo) {
+    this.titulo = titulo;
+  }
+
+  public int getDuracao() {
+    return duracao;
+  }
+
+  public void setDuracao(int duracao) {
+    this.duracao = duracao;
+  }
+
+  public boolean isEstaDandoPlay() {
+    return estaDandoPlay;
+  }
+
+  public void setEstaDandoPlay(boolean estaDandoPlay) {
+    this.estaDandoPlay = estaDandoPlay;
+  }
+
 }
 
 public class Questao1 {
