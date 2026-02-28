@@ -25,7 +25,7 @@ class Video {
 
 }
 
-public class QuestaoUm {
+public class Questao1 {
   public static void main(String[] args) {
     Video novoVideo = new Video("Aprendendo Java", 120, true);
     Video novoVideoDois = new Video("Teste", 1200, false);

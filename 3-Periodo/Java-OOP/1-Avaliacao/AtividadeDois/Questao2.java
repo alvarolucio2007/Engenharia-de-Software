@@ -27,7 +27,7 @@ class Elevador {
 
 }
 
-public class QuestaoDois {
+public class Questao2 {
   public static void main(String[] args) {
     Elevador novoElevador = new Elevador(2, 5);
     novoElevador.descer();
