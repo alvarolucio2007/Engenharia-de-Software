@@ -8,10 +8,10 @@ class Semaforo {
   }
 
   void trocar() {
-    if (cor == "vermelho".toLowerCase()) {
-      cor = "verde";
-    } else {
-      cor = "vermelho";
+    if (this.cor.equals("vermelho")) {
+      this.cor = "verde";
+    } else if (this.cor.equals("verde")) {
+      this.cor = "vermelho";
     }
   }
 
@@ -24,88 +24,23 @@ class Semaforo {
   }
 }
 
-class Veiculo {
-  private String placa;
-  private String tipo;
-
-  public Veiculo(String placa) {
-    this.placa = placa;
-  }
-
-  public String getPlaca() {
-    return placa;
-  }
-
-  public void setPlaca(String placa) {
-    this.placa = placa;
-  }
-
-  public String getTipo() {
-    return tipo;
-  }
-
-  public void setTipo(String tipo) {
-    this.tipo = tipo;
-  }
-
-  public Veiculo() {
-  }
-
+record Veiculo(String placa, String tipo) {
 }
 
-class Via {
-  private String nome;
-  private boolean fluxoVeiculos;
-
-  public Via(String nome, boolean fluxoVeiculos) {
-    this.nome = nome;
-    this.fluxoVeiculos = fluxoVeiculos;
-  }
-
-  public String getNome() {
-    return nome;
-  }
-
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
-
-  public boolean isFluxoVeiculos() {
-    return fluxoVeiculos;
-  }
-
-  public void setFluxoVeiculos(boolean fluxoVeiculos) {
-    this.fluxoVeiculos = fluxoVeiculos;
-  }
+record Via(String nome, boolean fluxoVeiculos) {
 }
 
-class SensorPassagem {
-  private int id;
-  private boolean estaAtivado;
-
-  public SensorPassagem(int id, boolean estaAtivado) {
-    this.estaAtivado = estaAtivado;
-    this.id = id;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public boolean isEstaAtivado() {
-    return estaAtivado;
-  }
-
-  public void setEstaAtivado(boolean estaAtivado) {
-    this.estaAtivado = estaAtivado;
-  }
-
+record SensorPassagem(int id, boolean estaAtivado) {
 }
 
 class ControladorCentral {
-
+  void monitorar(Semaforo semaforo, SensorPassagem sensor, Veiculo veiculo) {
+    if (!sensor.estaAtivado()) {
+      System.out.println("Sensor de passagem não está ativo.");
+    } else if (semaforo.getCor().equals("vermelho")) {
+      semaforo.trocar();
+      System.out.println("Prioridade detectada para" + veiculo.placa());
+      System.out.println("Semáforo agora está verde.");
+    }
+  }
 }
