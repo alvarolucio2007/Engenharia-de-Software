@@ -25,6 +25,22 @@ class Guerreiro {
       }
     }
   }
+
+  public int getEscudo() {
+    return escudo;
+  }
+
+  public void setEscudo(int escudo) {
+    this.escudo = escudo;
+  }
+
+  public int getVida() {
+    return vida;
+  }
+
+  public void setVida(int vida) {
+    this.vida = vida;
+  }
 }
 
 public class Questao6 {
