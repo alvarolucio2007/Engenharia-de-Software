@@ -7,6 +7,14 @@ class Pet {
     this.fome = fome;
   }
 
+  public int getFome() {
+    return fome;
+  }
+
+  public void setFome(int fome) {
+    this.fome = fome;
+  }
+
   void alimentar() {
     if (fome < 10 && fome > 0) {
       fome = 0;

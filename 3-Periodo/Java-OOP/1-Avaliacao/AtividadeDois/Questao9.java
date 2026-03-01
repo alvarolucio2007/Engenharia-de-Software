@@ -29,7 +29,7 @@ class Estoque {
     this.localizacaoCorredor = localizacaoCorredor;
   }
 
-  void aducionarEstoque(int quantidade) {
+  void adicionarEstoque(int quantidade) {
     if (quantidade > 0) {
       this.quantidadeAtual += quantidade;
     } else {

@@ -17,6 +17,22 @@ class Elevador {
     }
   }
 
+  public int getAndarAtual() {
+    return andarAtual;
+  }
+
+  public void setAndarAtual(int andarAtual) {
+    this.andarAtual = andarAtual;
+  }
+
+  public int getTotalAndares() {
+    return totalAndares;
+  }
+
+  public void setTotalAndares(int totalAndares) {
+    this.totalAndares = totalAndares;
+  }
+
   void descer() {
     if (andarAtual > 0) {
       andarAtual -= 1;

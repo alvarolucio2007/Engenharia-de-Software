@@ -20,6 +20,22 @@ class Disciplina {
       System.out.println("Reprovado por presença!");
     }
   }
+
+  public float getNotaFinal() {
+    return notaFinal;
+  }
+
+  public void setNotaFinal(float notaFinal) {
+    this.notaFinal = notaFinal;
+  }
+
+  public int getPresenca() {
+    return presenca;
+  }
+
+  public void setPresenca(int presenca) {
+    this.presenca = presenca;
+  }
 }
 
 public class Questao5 {
