@@ -3,6 +3,14 @@ package AtividadeDois;
 class ArCondicionado {
   private float temp;
 
+  public float getTemp() {
+    return temp;
+  }
+
+  public void setTemp(float temp) {
+    this.temp = temp;
+  }
+
   public ArCondicionado(float temp) {
     this.temp = temp;
   }
