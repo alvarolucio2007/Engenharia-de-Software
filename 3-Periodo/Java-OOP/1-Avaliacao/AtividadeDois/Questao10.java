@@ -44,6 +44,10 @@ class Cupom {
       return false;
     } else if (nome.equals("CONSUMIDOR20")) {
       descontoDado = 20;
+      this.usosRestantes -= 1;
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -77,47 +81,51 @@ class Cliente {
 }
 
 class ProcessadordeVendas {
-  private int porcDesconto;
   private Cliente cliente;
   private Cupom cupom;
-  private double valorTotal;
-  private double valorDescontado;
+  private double valorBruto;
+  private double valorFinal;
 
-  public ProcessadordeVendas(int porcDesconto, Cliente cliente, Cupom cupom, double valorTotal) {
-    this.porcDesconto = porcDesconto;
+  public ProcessadordeVendas(Cliente cliente, Cupom cupom, double valorBruto) {
     this.cliente = cliente;
     this.cupom = cupom;
-    this.valorTotal = valorTotal;
+    this.valorBruto = valorBruto;
+    this.valorFinal = valorBruto;
   }
 
-  public int getPorcDesconto() {
-    return porcDesconto;
-  }
+  void processarCompra() {
+    System.out.println("--- EXTRATO DE COMPRA ---");
+    System.out.println("Valor Original: R$ " + valorBruto);
 
-  public void setPorcDesconto(int porcDesconto) {
-    this.porcDesconto = porcDesconto;
-  }
-
-  public Cliente getCliente() {
-    return cliente;
-  }
-
-  public void setCliente(Cliente cliente) {
-    this.cliente = cliente;
-  }
-
-  public Cupom getCupom() {
-    return cupom;
-  }
-
-  public void setCupom(Cupom cupom) {
-    this.cupom = cupom;
-  }
-
-  void calcularDesconto(int porcDesconto,Cliente cliente,Cupom,cupom){
-    if (!cliente.getTipoCliente().equals("VIP"))&&(cupom.)){
-      
+    if ("VIP".equals(cliente.getTipoCliente())) {
+      double descontoVip = valorFinal * 0.05;
+      valorFinal -= descontoVip;
+      System.out.println("Desconto VIP (5%): R$ " + descontoVip);
     }
 
+    if (cupom.testarCupom()) {
+      valorFinal -= 20.00;
+      System.out.println("Cupom CONSUMIDOR20 aplicado: R$ 20,00");
+    }
+
+    System.out.println("Valor Final a Pagar: R$ " + valorFinal);
+    System.out.println("-------------------------");
+  }
+
+}
+
+public class Questao10 {
+  public static void main(String[] args) {
+    Cupom c1 = new Cupom(0, "CONSUMIDOR20", 1); // 1 uso restante
+    Cliente v1 = new Cliente("VIP", c1);
+
+    // Primeira tentativa (Deve dar desconto)
+    ProcessadordeVendas p1 = new ProcessadordeVendas(v1, c1, 100.0);
+    p1.processarCompra();
+
+    // Segunda tentativa (Deve barrar o cupom)
+    System.out.println("\nTentando usar o cupom novamente...");
+    ProcessadordeVendas p2 = new ProcessadordeVendas(v1, c1, 100.0);
+    p2.processarCompra();
   }
 }
