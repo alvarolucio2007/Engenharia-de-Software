@@ -121,9 +121,8 @@ public class Questao3 {
     Banco novoBanco = new Banco(0);
     Conta novaContaA = new Conta(1, "Teste da silva", 500);
     Conta novaContaB = new Conta(2, "Walter White", 100);
-    novoBanco.transferir(novaContaA, novaContaB, 650);
-
-    novoBanco.transferir(novaContaA, novaContaB, 650)
+    System.out.println(novoBanco.transferir(novaContaA, novaContaB, 650));
+    System.out.println(novoBanco.transferir(novaContaA, novaContaB, 100));
 
   }
 }
