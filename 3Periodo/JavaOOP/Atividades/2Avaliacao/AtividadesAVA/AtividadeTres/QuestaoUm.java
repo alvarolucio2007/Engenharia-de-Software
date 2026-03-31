@@ -1,4 +1,4 @@
-class Funcionario {
+abstract class Funcionario {
   protected String nome;
   protected double salario;
 
@@ -50,8 +50,8 @@ class Assistente extends Funcionario {
 
   @Override
   void exibeDados() {
-
-    System.out.println("Nome: " + this.nome + "\n Salário: " + this.salario + "\n Matrícula: " + this.matricula);
+    super.exibeDados();
+    System.out.println("Matrícula: " + this.matricula);
   }
 
   public String getMatricula() {
