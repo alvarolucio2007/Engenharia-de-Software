@@ -36,7 +36,7 @@ class Funcionario {
   }
 
   void exibeDados() {
-    System.out.println("Nome: " + this.nome + "/n Salário: " + this.salario);
+    System.out.println("Nome: " + this.nome + "\n Salário: " + this.salario);
   }
 }
 
@@ -51,7 +51,7 @@ class Assistente extends Funcionario {
   @Override
   void exibeDados() {
 
-    System.out.println("Nome: " + this.nome + "/n Salário: " + this.salario + "/n Matrícula: " + this.matricula);
+    System.out.println("Nome: " + this.nome + "\n Salário: " + this.salario + "\n Matrícula: " + this.matricula);
   }
 
   public String getMatricula() {
@@ -81,7 +81,6 @@ class AssistenteTecnico extends Assistente {
   }
 
   @Override
-
   void ganhoAnual() {
     System.out.println((salario * 12) + bonus);
   }
