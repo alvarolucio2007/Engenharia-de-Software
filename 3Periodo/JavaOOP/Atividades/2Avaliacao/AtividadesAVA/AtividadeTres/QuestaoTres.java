@@ -33,7 +33,26 @@ class VIP extends Ingresso {
     super(reais);
     this.adicionalVIP = adicionalVIP;
   }
+}
 
+class CamaroteInferior extends VIP {
+
+  public CamaroteInferior(double reais, double adicionalVIP) {
+    super(reais, adicionalVIP);
+  }
+
+}
+
+class CamaroteSuperior extends VIP {
+
+  public CamaroteSuperior(double reais, double adicionalVIP) {
+    super(reais, adicionalVIP);
+  }
+
+  @Override
+  protected void imprimeValor() {
+    System.out.println(this.reais);
+  }
 }
 
 class Normal extends Ingresso {
@@ -42,7 +61,7 @@ class Normal extends Ingresso {
     super(reais);
   }
 
-  private void impromeIngresso() {
+  private void imprimeIngresso() {
     System.out.println("Ingresso Normal");
   }
 }
