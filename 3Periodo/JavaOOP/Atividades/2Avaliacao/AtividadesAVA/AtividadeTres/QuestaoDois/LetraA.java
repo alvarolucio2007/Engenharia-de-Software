@@ -35,7 +35,7 @@ class Cachorro extends Animal {
     super(nome, raca);
   }
 
-  private String latir() {
+  public String latir() {
     return "Latindo...";
 
   }
@@ -47,7 +47,7 @@ class Gato extends Animal {
     super(nome, raca);
   }
 
-  private String miar() {
+  public String miar() {
     return "Miando...";
   }
 }
