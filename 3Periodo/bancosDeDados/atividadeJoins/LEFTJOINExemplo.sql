@@ -18,5 +18,5 @@ INSERT INTO alunos2 VALUES
   SELECT * FROM alunos;
   SELECT * FROM alunos2;
   
-SELECT * FROM alunos RIGHT JOIN alunos2 ON alunos.AGE=alunos2.AGE
+SELECT * FROM alunos LEFT JOIN alunos2 ON alunos.AGE=alunos2.AGE
 
