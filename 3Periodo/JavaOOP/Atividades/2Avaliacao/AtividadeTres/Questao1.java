@@ -34,8 +34,10 @@ class Produto {
 
   public void adicionarEstoque(int qtd) {
     if (qtd <= 0) {
-      this.estoque += qtd;
+      System.out.println("Quantidade menor ou igual a 0");
+      return;
     }
+    this.estoque += qtd;
   }
 
   public void vender(int qtd) {
@@ -92,17 +94,9 @@ class Perecivel extends Produto {
 }
 
 class ProdutoImportado extends Produto {
-  private float taxaImportaxao;
+  private double taxaImportaxao;
 
-  public float getTaxaImportaxao() {
-    return taxaImportaxao;
-  }
-
-  public void setTaxaImportaxao(float taxaImportaxao) {
-    this.taxaImportaxao = taxaImportaxao;
-  }
-
-  public ProdutoImportado(String nome, double preco, int estoque, float taxaImportaxao) {
+  public ProdutoImportado(String nome, double preco, int estoque, double taxaImportaxao) {
     super(nome, preco, estoque);
     this.taxaImportaxao = taxaImportaxao;
   }
@@ -117,12 +111,22 @@ class ProdutoImportado extends Produto {
     this.estoque -= qtd;
     System.out.println("Preço final: " + (this.preco + this.taxaImportaxao));
   }
+
+  public double getTaxaImportaxao() {
+    return taxaImportaxao;
+  }
+
+  public void setTaxaImportaxao(double taxaImportaxao) {
+    this.taxaImportaxao = taxaImportaxao;
+  }
+
 }
 
 class Venda {
   private Produto produto;
 
   public Venda(Produto produto) {
+
     this.produto = produto;
   }
 
@@ -144,5 +148,16 @@ class Venda {
 
   public void vender(Perecivel produto, int quantidade) {
     produto.vender(quantidade);
+  }
+}
+
+public class Questao1 {
+  public static void main(String[] args) {
+
+    Produto p1 = new Produto("Arroz", 25.5, 12);
+    var data = LocalDate.of(2026, 4, 8);
+    Perecivel leite = new Perecivel("Leite", 20, 12, data);
+    ProdutoImportado perfume = new ProdutoImportado("Perfume", 12.90, 12, 129.90);
+    Venda venda = new Venda(p1);
   }
 }
