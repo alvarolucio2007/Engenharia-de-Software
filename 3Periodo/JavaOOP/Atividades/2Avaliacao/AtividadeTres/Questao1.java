@@ -1,5 +1,18 @@
 import java.time.LocalDate;
 
+public class Questao1 {
+  public static void main(String[] args) {
+    Produto p1 = new Produto("Arroz", 25.5, 11);
+    var data = LocalDate.of(2026, 4, 8);
+    Perecivel leite = new Perecivel("Leite", 20, 11, data);
+    ProdutoImportado perfume = new ProdutoImportado("Perfume", 12.90, 11, 129.90);
+    Venda venda = new Venda(p1);
+    venda.vender(leite, 12);
+    venda.vender(perfume, 12);
+    venda.vender(p1, 12);
+  }
+}
+
 class Produto {
 
   protected String nome;
@@ -148,16 +161,5 @@ class Venda {
 
   public void vender(Perecivel produto, int quantidade) {
     produto.vender(quantidade);
-  }
-}
-
-public class Questao1 {
-  public static void main(String[] args) {
-
-    Produto p1 = new Produto("Arroz", 25.5, 12);
-    var data = LocalDate.of(2026, 4, 8);
-    Perecivel leite = new Perecivel("Leite", 20, 12, data);
-    ProdutoImportado perfume = new ProdutoImportado("Perfume", 12.90, 12, 129.90);
-    Venda venda = new Venda(p1);
   }
 }
