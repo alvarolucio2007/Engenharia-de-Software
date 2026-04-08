@@ -130,7 +130,7 @@ class ProdutoImportado extends Produto {
       System.out.println("Quantidade maior que estoque atual");
     }
     this.estoque -= qtd;
-    System.out.println("Preço final: " + (this.preco + this.taxaImportaxao));
+    System.out.println("Preço final: " + (this.preco + this.taxaImportacao));
   }
 }
 
