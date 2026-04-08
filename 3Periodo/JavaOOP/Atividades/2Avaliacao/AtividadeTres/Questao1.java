@@ -107,11 +107,19 @@ class Perecivel extends Produto {
 }
 
 class ProdutoImportado extends Produto {
-  private double taxaImportaxao;
+  private double taxaImportacao;
 
-  public ProdutoImportado(String nome, double preco, int estoque, double taxaImportaxao) {
+  public ProdutoImportado(String nome, double preco, int estoque, double taxaImportacao) {
     super(nome, preco, estoque);
-    this.taxaImportaxao = taxaImportaxao;
+    this.taxaImportacao = taxaImportacao;
+  }
+
+  public double getTaxaImportacao() {
+    return taxaImportacao;
+  }
+
+  public void setTaxaImportacao(double taxaImportacao) {
+    this.taxaImportacao = taxaImportacao;
   }
 
   @Override
@@ -124,15 +132,6 @@ class ProdutoImportado extends Produto {
     this.estoque -= qtd;
     System.out.println("Preço final: " + (this.preco + this.taxaImportaxao));
   }
-
-  public double getTaxaImportaxao() {
-    return taxaImportaxao;
-  }
-
-  public void setTaxaImportaxao(double taxaImportaxao) {
-    this.taxaImportaxao = taxaImportaxao;
-  }
-
 }
 
 class Venda {
