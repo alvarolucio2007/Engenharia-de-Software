@@ -1,4 +1,3 @@
-package AtividadeDois;
 
 class Video {
   private String titulo;
