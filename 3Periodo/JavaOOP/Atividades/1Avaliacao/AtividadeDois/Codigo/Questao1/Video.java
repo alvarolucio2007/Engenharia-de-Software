@@ -1,3 +1,4 @@
+package Questao1;
 
 class Video {
   private String titulo;
@@ -46,16 +47,4 @@ class Video {
     this.estaDandoPlay = estaDandoPlay;
   }
 
-}
-
-public class Questao1 {
-  public static void main(String[] args) {
-    Video novoVideo = new Video("Aprendendo Java", 120, true);
-    Video novoVideoDois = new Video("Teste", 1200, false);
-    novoVideo.setPlay(true);
-    novoVideo.alternarPlay();
-    novoVideo.mostrarStat();
-    novoVideoDois.mostrarStat();
-
-  }
 }
