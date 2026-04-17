@@ -1,4 +1,3 @@
-package AtividadeQuatro;
 
 abstract class Veiculo {
   private String marca;
@@ -49,6 +48,16 @@ abstract class Veiculo {
     this.capacidadeTanque = capacidadeTanque;
     this.capacidadeAtualTanque = capacidadeAtualTanque;
   }
+
+  public void frear() {
+    this.velocidade = Math.max(0, this.velocidade - 10);
+  }
+
+  public void frear(int decremento) {
+    this.velocidade = Math.max(0, this.velocidade - decremento);
+  }
+
+  public abstract void exibirStatus();
 
   public void ligar() {
     System.out.println("Ligando...");
@@ -142,13 +151,18 @@ abstract class Veiculo {
 
 class Carro extends Veiculo {
 
-  public Carro(String marca, String modelo, String placa, double capacidadeTanque, double capacidadeAtualTanque) {
+  private int numPortas;
+
+  public Carro(String marca, String modelo, String placa, double capacidadeTanque, double capacidadeAtualTanque,
+      int numPortas) {
     super(marca, modelo, placa, capacidadeTanque, capacidadeAtualTanque);
+    this.numPortas = numPortas;
   }
 
   public Carro(String marca, String modelo, float velocidade, String placa, double capacidadeTanque,
-      double capacidadeAtualTanque) {
+      double capacidadeAtualTanque, int numPortas) {
     super(marca, modelo, velocidade, placa, capacidadeTanque, capacidadeAtualTanque);
+    this.numPortas = numPortas;
   }
 
   public void acelerar() {
@@ -172,9 +186,16 @@ class Carro extends Veiculo {
   public void calcularConsumo() {
     System.out.println("Consumo do carro: médio.");
   }
+
+  @Override
+  public void exibirStatus() {
+    System.out.println(toString() + "| Portas: " + numPortas);
+  }
 }
 
 class Moto extends Veiculo {
+
+  private int cilindadas;
 
   public Moto(String marca, String modelo, String placa, double capacidadeTanque, double capacidadeAtualTanque) {
     super(marca, modelo, placa, capacidadeTanque, capacidadeAtualTanque);
@@ -197,6 +218,11 @@ class Moto extends Veiculo {
   public void calcularConsumo() {
     System.out.println("Consumo da moto: baixo.");
   }
+
+  @Override
+  public void exibirStatus() {
+    System.out.println("Moto: " + getMarca() + " | cilindadas: " + cilindadas);
+  }
 }
 
 class Caminhao extends Veiculo {
@@ -213,6 +239,16 @@ class Caminhao extends Veiculo {
   @Override
   public void calcularConsumo() {
     System.out.println("Consumo do caminhão: alto.");
+  }
+
+  @Override
+  public String toString() {
+    return "Caminhao []";
+  }
+
+  @Override
+  public void exibirStatus() {
+    System.out.println(toString());
   }
 
 }
