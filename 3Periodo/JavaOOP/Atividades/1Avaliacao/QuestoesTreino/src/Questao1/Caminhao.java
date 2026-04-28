@@ -1,4 +1,8 @@
+
+package Questao1;
+
 class Caminhao {
+
   private String placa;
   private double capacidadeTanque;
   private double combustivelAtual;
@@ -54,15 +58,5 @@ class Caminhao {
   boolean viagemEhPossivel(int distanciaKm) {
     double consumoViagem = (double) distanciaKm / this.consumoKmPorLitro;
     return this.combustivelAtual >= consumoViagem;
-  }
-}
-
-public class Questao1 {
-  public static void main(String[] args) {
-    Caminhao novoCaminhao = new Caminhao(5, "Teste", 300, 50.0);
-    System.out.println(novoCaminhao.viagemEhPossivel(400));
-    novoCaminhao.abastecer(100);
-
-    System.out.println(novoCaminhao.viagemEhPossivel(400));
   }
 }
