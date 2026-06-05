@@ -21,10 +21,10 @@ class OperacaoInvalidaException extends RuntimeException {
 }
 
 abstract class ContaBancaria {
-  private int numero;
-  private String titular;
+  protected int numero;
+  protected String titular;
 
-  private double saldo;
+  protected double saldo;
 
   public ContaBancaria(int numero, String titular, double saldo) {
     this.numero = numero;
@@ -71,9 +71,41 @@ interface Bloqueavel {
   boolean isAtiva(ContaBancaria cb);
 }
 
-class ContaCorrente {
+class ContaCorrente extends ContaBancaria {
   private double chequeEspecial;
-  private double porcImposto;
+  private static final double porcImposto = 0.0038;
+
+  public double getChequeEspecial() {
+    return chequeEspecial;
+  }
+
+  public void setChequeEspecial(double chequeEspecial) throws RuntimeException {
+    if (chequeEspecial <= 1000) {
+      this.chequeEspecial = chequeEspecial;
+      return;
+    }
+    throw new RuntimeException("Cheque especial tem limite de apenas 1000 reais.");
+  }
+
+  public ContaCorrente(int numero, String titular, double saldo, double chequeEspecial) {
+    super(numero, titular, saldo);
+    this.chequeEspecial = chequeEspecial;
+  }
+
+  @Override
+  public double calcularRendimento() {
+    return chequeEspecial + saldo;
+  }
+
+  @Override
+  public void sacar(double saque) throws SaldoInsuficienteException {
+    if (saque <= this.saldo + this.chequeEspecial && saque >= 0) {
+      this.saldo -= saque;
+      return;
+    }
+    throw new SaldoInsuficienteException("Quantidade inválida!");
+  }
+
 }
 
 class ContaPoupanca {
