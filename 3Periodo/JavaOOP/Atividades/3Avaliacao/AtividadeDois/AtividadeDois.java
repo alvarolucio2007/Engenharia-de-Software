@@ -195,4 +195,44 @@ class ContaPoupanca extends ContaBancaria implements Bloqueavel {
 
 }
 
-class ContaSalario extends ContaBancaria
+class ContaSalario extends ContaBancaria implements Bloqueavel {
+
+  private boolean ativa = true;
+
+  @Override
+  public void bloquear(ContaBancaria cb) {
+    this.ativa = false;
+  }
+
+  @Override
+  public void desbloquear(ContaBancaria cb) {
+    this.ativa = true;
+  }
+
+  @Override
+  public boolean isAtiva(ContaBancaria cb) {
+    return this.ativa;
+  }
+
+  public ContaSalario(int numero, String titular, double saldo) {
+    super(numero, titular, saldo);
+  }
+
+  @Override
+  public void sacar(double saque, int quantDias) throws SaldoInsuficienteException, OperacaoInvalidaException {
+    if (quantDias < 30) {
+      throw new OperacaoInvalidaException("Intervalo entre saques muito curto!");
+    }
+    if (!this.ativa) {
+      throw new OperacaoInvalidaException("Conta bloqueada!");
+    }
+    if (saque <= 0) {
+      throw new SaldoInsuficienteException("Valor do saque inválido!");
+    }
+    if (saque > saldo) {
+      throw new SaldoInsuficienteException("Saldo insuficiente!");
+    } else {
+      this.saldo -= saque;
+    }
+  }
+}
