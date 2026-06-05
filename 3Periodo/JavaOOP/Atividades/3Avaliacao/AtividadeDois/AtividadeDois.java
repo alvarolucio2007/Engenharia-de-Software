@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 class SaldoInsuficienteException extends RuntimeException {
 
@@ -28,7 +30,7 @@ abstract class ContaBancaria {
 
   public ContaBancaria(int numero, String titular, double saldo) {
     this.numero = numero;
-    if (checarTitular(this.titular)) {
+    if (checarTitular(titular)) {
       this.titular = titular;
     }
     this.saldo = saldo;
@@ -121,9 +123,12 @@ class ContaCorrente extends ContaBancaria implements Bloqueavel {
   }
 
   @Override
-  public void sacar(double saque) throws SaldoInsuficienteException, RuntimeException {
+  public void sacar(double saque, int quantDias) throws SaldoInsuficienteException, RuntimeException {
     if (!this.ativa) {
       throw new OperacaoInvalidaException("Conta bloqueada!");
+    }
+    if (quantDias < 30) {
+      throw new OperacaoInvalidaException("Intervalo entre saques muito curto!");
     }
     if (saque <= 0) {
       throw new SaldoInsuficienteException("Valor do saque inválido!");
@@ -235,10 +240,45 @@ class ContaSalario extends ContaBancaria implements Bloqueavel {
       this.saldo -= saque;
     }
   }
+
+  public ContaSalario(int numero, String titular, double saldo, boolean ativa) {
+    super(numero, titular, saldo);
+    this.ativa = ativa;
+  }
+
 }
 
 public class AtividadeDois {
   public static void main(String[] args) {
+    List<ContaBancaria> listaContas = new ArrayList<>();
+    listaContas.add(new ContaCorrente(1001, "Jubiscreimilidilsson", 500, 200));
+    listaContas.add(new ContaPoupanca(1002, "Lubiléldison da Silva", 670, true));
+    listaContas.add(new ContaSalario(1003, "Feindomildo Borges de Machado ", 100, true));
+    for (ContaBancaria conta : listaContas) {
+      if (conta instanceof ContaCorrente) {
+        double rendimentoCC = ((ContaCorrente) conta).calcularRendimento();
+        System.out.println(conta.titular + " " + rendimentoCC);
+      } else if (conta instanceof ContaPoupanca) {
+        double rendimentoCP = ((ContaPoupanca) conta).calcularRendimento(2);
+        System.out.println(conta.titular + " " + rendimentoCP);
+      } else if (conta instanceof ContaSalario) {
+        System.out.println(conta.titular + "não possui rendimentos (pobre)");
+      }
+    }
+    try {
+      ContaCorrente cc = (ContaCorrente) listaContas.get(0);
+      System.out.println("Tentando sacar 1000 reais da conta do Lucas...");
+      cc.sacar(1000.0); // Erro
+    } catch (SaldoInsuficienteException e) {
+      System.out.println("Catch capturou com sucesso: " + e.getMessage());
+    }
 
+    try {
+      ContaPoupanca poupanca = (ContaPoupanca) listaContas.get(1); // Pega a Maria
+      System.out.println("Tentando fazer um saque na poupança com intervalo de apenas 10 dias...");
+      poupanca.sacar(50.0, 10); // Erro
+    } catch (OperacaoInvalidaException e) {
+      System.out.println("Catch capturou com sucesso: " + e.getMessage());
+    }
   }
 }
