@@ -54,7 +54,7 @@ abstract class ContaBancaria {
     throw new SaldoInsuficienteException("Quantidade inválida!");
   }
 
-  protected void sacar(double saque, int quantDias) throws SaldoInsuficienteException, OperacaoInvalidaException {
+  protected void sacar(double saque, int quantDias) throws SaldoInsuficienteException, RuntimeException {
     if (saque <= this.saldo && saque >= 0 && quantDias > 30) {
       this.saldo -= saque;
       return;
@@ -121,7 +121,7 @@ class ContaCorrente extends ContaBancaria implements Bloqueavel {
   }
 
   @Override
-  public void sacar(double saque) throws SaldoInsuficienteException, OperacaoInvalidaException {
+  public void sacar(double saque) throws SaldoInsuficienteException, RuntimeException {
     if (!this.ativa) {
       throw new OperacaoInvalidaException("Conta bloqueada!");
     }
@@ -170,7 +170,7 @@ class ContaPoupanca extends ContaBancaria implements Bloqueavel {
   }
 
   @Override
-  public void sacar(double saque, int quantDias) throws SaldoInsuficienteException, OperacaoInvalidaException {
+  public void sacar(double saque, int quantDias) throws SaldoInsuficienteException, RuntimeException {
     if (quantDias < 30) {
       throw new OperacaoInvalidaException("Intervalo entre saques muito curto!");
     }
@@ -234,5 +234,11 @@ class ContaSalario extends ContaBancaria implements Bloqueavel {
     } else {
       this.saldo -= saque;
     }
+  }
+}
+
+public class AtividadeDois {
+  public static void main(String[] args) {
+
   }
 }
