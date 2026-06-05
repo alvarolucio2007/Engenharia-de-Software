@@ -99,14 +99,24 @@ class ContaCorrente extends ContaBancaria {
 
   @Override
   public void sacar(double saque) throws SaldoInsuficienteException {
-    if (saque <= this.saldo + this.chequeEspecial && saque >= 0) {
-      this.saldo -= saque;
-      return;
+    if (saque <= 0) {
+      throw new SaldoInsuficienteException("Valor do saque inválido!");
     }
-    throw new SaldoInsuficienteException("Quantidade inválida!");
+    double totalDesconto = saque + (saque * 0.0038);
+    double saldoTotalDisponivel = this.saldo + this.chequeEspecial;
+    if (totalDesconto > saldoTotalDisponivel) {
+      throw new SaldoInsuficienteException("Saldo e cheque especial insuficientes!");
+    }
+    if (totalDesconto <= this.saldo) {
+      this.saldo -= totalDesconto;
+    } else {
+      double restante = totalDesconto - this.saldo;
+      this.saldo = 0;
+      this.chequeEspecial -= restante;
+    }
+
   }
 
-}
-
 class ContaPoupanca {
+  private static final double rendimento = 0.005;
 }
