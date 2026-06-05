@@ -142,55 +142,57 @@ class ContaCorrente extends ContaBancaria implements Bloqueavel {
     }
 
   }
+}
 
-  class ContaPoupanca extends ContaBancaria implements Bloqueavel {
-    private static final double imposto = 0.225;
-    private static final double rendimento = 0.005;
-    private boolean ativa = true;
+class ContaPoupanca extends ContaBancaria implements Bloqueavel {
+  private static final double imposto = 0.225;
+  private static final double rendimento = 0.005;
+  private boolean ativa = true;
 
-    public ContaPoupanca(int numero, String titular, double saldo, boolean ativa) {
-      super(numero, titular, saldo);
-      this.ativa = ativa;
+  public ContaPoupanca(int numero, String titular, double saldo, boolean ativa) {
+    super(numero, titular, saldo);
+    this.ativa = ativa;
+  }
+
+  @Override
+  public void bloquear(ContaBancaria cb) {
+    this.ativa = false;
+  }
+
+  @Override
+  public void desbloquear(ContaBancaria cb) {
+    this.ativa = true;
+  }
+
+  @Override
+  public boolean isAtiva(ContaBancaria cb) {
+    return this.ativa;
+  }
+
+  @Override
+  public void sacar(double saque, int quantDias) throws SaldoInsuficienteException, OperacaoInvalidaException {
+    if (quantDias < 30) {
+      throw new OperacaoInvalidaException("Intervalo entre saques muito curto!");
     }
-
-    @Override
-    public void bloquear(ContaBancaria cb) {
-      this.ativa = false;
+    if (!this.ativa) {
+      throw new OperacaoInvalidaException("Conta bloqueada!");
     }
-
-    @Override
-    public void desbloquear(ContaBancaria cb) {
-      this.ativa = true;
+    if (saque <= 0) {
+      throw new SaldoInsuficienteException("Valor do saque inválido!");
     }
-
-    @Override
-    public boolean isAtiva(ContaBancaria cb) {
-      return this.ativa;
-    }
-
-    @Override
-    public void sacar(double saque, int quantDias) throws SaldoInsuficienteException, OperacaoInvalidaException {
-      if (quantDias < 30) {
-        throw new OperacaoInvalidaException("Intervalo entre saques muito curto!");
-      }
-      if (!this.ativa) {
-        throw new OperacaoInvalidaException("Conta bloqueada!");
-      }
-      if (saque <= 0) {
-        throw new SaldoInsuficienteException("Valor do saque inválido!");
-      }
-      double totalDesconto = saque + (saque * imposto);
-      if (totalDesconto > saldo) {
-        throw new SaldoInsuficienteException("Saldo insuficiente!");
-      } else {
-        this.saldo -= totalDesconto;
-      }
-
-    }
-
-    public double calcularRendimento(int quantMeses) {
-      return this.saldo * Math.pow(1 + rendimento, quantMeses); // M=P*(1+i)^t
+    double totalDesconto = saque + (saque * imposto);
+    if (totalDesconto > saldo) {
+      throw new SaldoInsuficienteException("Saldo insuficiente!");
+    } else {
+      this.saldo -= totalDesconto;
     }
 
   }
+
+  public double calcularRendimento(int quantMeses) {
+    return this.saldo * Math.pow(1 + rendimento, quantMeses); // M=P*(1+i)^t
+  }
+
 }
+
+class ContaSalario extends ContaBancaria
