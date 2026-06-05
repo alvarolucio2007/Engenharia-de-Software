@@ -1,3 +1,4 @@
+
 class SaldoInsuficienteException extends RuntimeException {
 
   public SaldoInsuficienteException() {
@@ -23,7 +24,6 @@ class OperacaoInvalidaException extends RuntimeException {
 abstract class ContaBancaria {
   protected int numero;
   protected String titular;
-
   protected double saldo;
 
   public ContaBancaria(int numero, String titular, double saldo) {
@@ -37,8 +37,6 @@ abstract class ContaBancaria {
   private boolean checarTitular(String titular) {
     return titular != null && !titular.trim().isEmpty();
   }
-
-  protected abstract double calcularRendimento();
 
   protected void depositar(double deposito) throws OperacaoInvalidaException {
     if (deposito >= 0) {
@@ -55,12 +53,21 @@ abstract class ContaBancaria {
     }
     throw new SaldoInsuficienteException("Quantidade inválida!");
   }
+
+  protected void sacar(double saque, int quantDias) throws SaldoInsuficienteException, OperacaoInvalidaException {
+    if (saque <= this.saldo && saque >= 0 && quantDias > 30) {
+      this.saldo -= saque;
+      return;
+    } else if (quantDias < 30) {
+      throw new OperacaoInvalidaException("Período entre saques muito curto!");
+    }
+    throw new SaldoInsuficienteException("Quantidade inválida!");
+  }
 }
 
 interface Tributavel {
   void calcularImposto(ContaCorrente cc);
 
-  void calcularImposto(ContaPoupanca cp);
 }
 
 interface Bloqueavel {
@@ -71,9 +78,26 @@ interface Bloqueavel {
   boolean isAtiva(ContaBancaria cb);
 }
 
-class ContaCorrente extends ContaBancaria {
+class ContaCorrente extends ContaBancaria implements Bloqueavel {
   private double chequeEspecial;
+
+  private boolean ativa = true;
   private static final double porcImposto = 0.0038;
+
+  @Override
+  public void bloquear(ContaBancaria cb) {
+    this.ativa = false;
+  }
+
+  @Override
+  public void desbloquear(ContaBancaria cb) {
+    this.ativa = true;
+  }
+
+  @Override
+  public boolean isAtiva(ContaBancaria cb) {
+    return this.ativa;
+  }
 
   public double getChequeEspecial() {
     return chequeEspecial;
@@ -92,13 +116,15 @@ class ContaCorrente extends ContaBancaria {
     this.chequeEspecial = chequeEspecial;
   }
 
-  @Override
   public double calcularRendimento() {
     return chequeEspecial + saldo;
   }
 
   @Override
-  public void sacar(double saque) throws SaldoInsuficienteException {
+  public void sacar(double saque) throws SaldoInsuficienteException, OperacaoInvalidaException {
+    if (!this.ativa) {
+      throw new OperacaoInvalidaException("Conta bloqueada!");
+    }
     if (saque <= 0) {
       throw new SaldoInsuficienteException("Valor do saque inválido!");
     }
@@ -117,6 +143,45 @@ class ContaCorrente extends ContaBancaria {
 
   }
 
-class ContaPoupanca {
-  private static final double rendimento = 0.005;
+  class ContaPoupanca extends ContaBancaria implements Bloqueavel {
+    private static final double imposto = 0.225;
+    private static final double rendimento = 0.005;
+    private boolean ativa = true;
+
+    public ContaPoupanca(int numero, String titular, double saldo, boolean ativa) {
+      super(numero, titular, saldo);
+      this.ativa = ativa;
+    }
+
+    @Override
+    public void bloquear(ContaBancaria cb) {
+      this.ativa = false;
+    }
+
+    @Override
+    public void desbloquear(ContaBancaria cb) {
+      this.ativa = true;
+    }
+
+    @Override
+    public boolean isAtiva(ContaBancaria cb) {
+      return this.ativa;
+    }
+
+    @Override
+    public void sacar(double saque, int quantMeses) throws SaldoInsuficienteException, OperacaoInvalidaException {
+      if (!this.ativa) {
+        throw new OperacaoInvalidaException("Conta bloqueada!");
+      }
+      if (saque <= 0) {
+        throw new SaldoInsuficienteException("Valor do saque inválido!");
+      }
+
+    }
+
+    public double calcularRendimento(int quantMeses) {
+      return saldo + (saldo * rendimento);
+    }
+
+  }
 }
