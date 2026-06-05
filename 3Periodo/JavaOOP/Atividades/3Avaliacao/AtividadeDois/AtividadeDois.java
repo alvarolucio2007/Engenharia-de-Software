@@ -82,7 +82,7 @@ class ContaCorrente extends ContaBancaria implements Bloqueavel {
   private double chequeEspecial;
 
   private boolean ativa = true;
-  private static final double porcImposto = 0.0038;
+  private static final double imposto = 0.0038;
 
   @Override
   public void bloquear(ContaBancaria cb) {
@@ -128,7 +128,7 @@ class ContaCorrente extends ContaBancaria implements Bloqueavel {
     if (saque <= 0) {
       throw new SaldoInsuficienteException("Valor do saque inválido!");
     }
-    double totalDesconto = saque + (saque * 0.0038);
+    double totalDesconto = saque + (saque * imposto);
     double saldoTotalDisponivel = this.saldo + this.chequeEspecial;
     if (totalDesconto > saldoTotalDisponivel) {
       throw new SaldoInsuficienteException("Saldo e cheque especial insuficientes!");
@@ -169,18 +169,27 @@ class ContaCorrente extends ContaBancaria implements Bloqueavel {
     }
 
     @Override
-    public void sacar(double saque, int quantMeses) throws SaldoInsuficienteException, OperacaoInvalidaException {
+    public void sacar(double saque, int quantDias) throws SaldoInsuficienteException, OperacaoInvalidaException {
+      if (quantDias < 30) {
+        throw new OperacaoInvalidaException("Intervalo entre saques muito curto!");
+      }
       if (!this.ativa) {
         throw new OperacaoInvalidaException("Conta bloqueada!");
       }
       if (saque <= 0) {
         throw new SaldoInsuficienteException("Valor do saque inválido!");
       }
+      double totalDesconto = saque + (saque * imposto);
+      if (totalDesconto > saldo) {
+        throw new SaldoInsuficienteException("Saldo insuficiente!");
+      } else {
+        this.saldo -= totalDesconto;
+      }
 
     }
 
     public double calcularRendimento(int quantMeses) {
-      return saldo + (saldo * rendimento);
+      return this.saldo * Math.pow(1 + rendimento, quantMeses); // M=P*(1+i)^t
     }
 
   }
