@@ -1,4 +1,3 @@
-// Package pilha discorre acerca da estrutura de dados pilha(stack)
 package main
 
 // O que é uma pilha/stack: Estrutura de dados LIFO (Last in First Out)/ FILO (First in Last Out)

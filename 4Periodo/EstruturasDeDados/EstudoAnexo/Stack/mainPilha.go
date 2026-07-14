@@ -9,7 +9,6 @@ func main() {
 	pilha1 := Pilha{
 		tamanho:   0,
 		estrutura: make([]TipoItem, 10),
-		limite:    10,
 	}
 
 	fmt.Println("Programa gerador de pilhas...")

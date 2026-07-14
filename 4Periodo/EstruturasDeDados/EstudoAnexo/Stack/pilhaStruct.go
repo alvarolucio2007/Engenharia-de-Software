@@ -2,6 +2,8 @@ package main
 
 type TipoItem int
 
+const maxItens int = 100
+
 type PilhaInterface interface {
 	EstaCheia() bool
 	EstaVazia() bool
@@ -14,5 +16,4 @@ type PilhaInterface interface {
 type Pilha struct {
 	tamanho   int
 	estrutura []TipoItem
-	limite    int
 }
