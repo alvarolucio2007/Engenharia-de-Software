@@ -7,6 +7,7 @@ import (
 
 func main() {
 	pilha1 := Pilha{
+		maxItens:  10,
 		tamanho:   0,
 		estrutura: make([]TipoItem, 10),
 	}

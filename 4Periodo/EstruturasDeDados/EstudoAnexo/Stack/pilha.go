@@ -5,7 +5,7 @@ import (
 )
 
 func (p *Pilha) EstaCheia() bool {
-	return p.tamanho == maxItens
+	return p.tamanho == p.maxItens
 }
 
 func (p *Pilha) EstaVazia() bool {
