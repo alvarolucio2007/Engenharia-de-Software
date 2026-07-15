@@ -6,8 +6,10 @@ import (
 )
 
 func main() {
+	maxItensFila := 1
 	fila1 := Fila{
-		estrutura: make([]TipoItem, 10),
+		estrutura: make([]TipoItem, maxItensFila),
+		maxItens:  maxItensFila,
 	}
 	fmt.Println("Programa gerador de filas...")
 	opcao := -1
