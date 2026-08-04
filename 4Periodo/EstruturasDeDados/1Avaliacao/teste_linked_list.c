@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 typedef struct Node {
   int dado;
@@ -39,4 +40,14 @@ int tamanho_pilha_dinamica(PilhaDinamica *p) {
     tamanho++;
   }
   return tamanho;
+}
+int main() {
+  PilhaDinamica minha_pilha;
+  push_pilha_dinamica(&minha_pilha, 1);
+  push_pilha_dinamica(&minha_pilha, 2);
+  int teste = pop_pilha_dinamica(&minha_pilha);
+
+  printf("%d\n", teste);
+  printf("%d\n", view_pilha_dinamica(&minha_pilha));
+  return 0;
 }
