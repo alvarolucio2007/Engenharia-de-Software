@@ -27,15 +27,15 @@ bool is_empty_pilha(PilhaDinamica *p) {
   }
   return false;
 }
-int pop_pilha_dinamica(PilhaDinamica *p) {
+bool pop_pilha_dinamica(PilhaDinamica *p, int *saida) {
   if (is_empty_pilha(p)) {
-    return -1;
+    return false;
   }
   Node *topo = p->node_topo;
-  int valor = topo->dado;
+  saida = &topo->dado;
   p->node_topo = topo->proximo;
   free(topo);
-  return valor;
+  return true;
 }
 int view_pilha_dinamica(PilhaDinamica *p) {
   if (is_empty_pilha(p)) {
@@ -56,9 +56,10 @@ int main() {
   PilhaDinamica minha_pilha;
   push_pilha_dinamica(&minha_pilha, 1);
   push_pilha_dinamica(&minha_pilha, 2);
-  int teste = pop_pilha_dinamica(&minha_pilha);
+  int saida_pop;
+  pop_pilha_dinamica(&minha_pilha, &saida_pop);
 
-  printf("%d\n", teste);
+  printf("%d\n", saida_pop);
   printf("%d\n", view_pilha_dinamica(&minha_pilha));
   return 0;
 }
