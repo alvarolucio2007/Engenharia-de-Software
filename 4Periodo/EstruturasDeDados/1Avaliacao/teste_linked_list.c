@@ -13,9 +13,13 @@ void new_node(Node *n, int dado) {
   n->proximo = NULL;
 }
 void push_pilha_dinamica(PilhaDinamica *p, int item) {
-  Node novo_node;
-  new_node(&novo_node, item);
-  p->node_topo = &novo_node;
+  Node *novo_node = (Node *)malloc(sizeof(Node));
+  if (novo_node == NULL) {
+    return;
+  }
+  novo_node->dado = item;
+  novo_node->proximo = p->node_topo;
+  p->node_topo = novo_node;
 }
 bool is_empty_pilha(PilhaDinamica *p) {
   if (p->node_topo == NULL) {
@@ -24,20 +28,27 @@ bool is_empty_pilha(PilhaDinamica *p) {
   return false;
 }
 int pop_pilha_dinamica(PilhaDinamica *p) {
-  int valor;
   if (is_empty_pilha(p)) {
     return -1;
   }
-  valor = p->node_topo->dado;
-  p->node_topo = p->node_topo->proximo;
+  Node *topo = p->node_topo;
+  int valor = topo->dado;
+  p->node_topo = topo->proximo;
+  free(topo);
   return valor;
 }
-int view_pilha_dinamica(PilhaDinamica *p) { return p->node_topo->dado; }
+int view_pilha_dinamica(PilhaDinamica *p) {
+  if (is_empty_pilha(p)) {
+    return -1;
+  }
+  return p->node_topo->dado;
+}
 int tamanho_pilha_dinamica(PilhaDinamica *p) {
   int tamanho = 0;
-  Node *node;
-  for (node = p->node_topo; node != NULL; node = node->proximo) {
+  Node *node = p->node_topo;
+  while (node != NULL) {
     tamanho++;
+    node = node->proximo;
   }
   return tamanho;
 }
