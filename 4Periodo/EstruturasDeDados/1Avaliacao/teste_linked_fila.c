@@ -35,8 +35,8 @@ bool pop_fila_dinamica(FilaDinamica *f, int *saida) {
   free(f->primeiro);
   f->primeiro = prox_no; // fila anda...
   if (f->primeiro == NULL) {
-    f->ultimo = NULL; // se o próximo está vazio, fila acabou. devo dar free?
-                      // acho q n, toda vez q da pop já da free do node usado
+    f->ultimo = NULL; // se o próximo está vazio, fila acabou.
+                      //  toda vez q da pop já da free do node usado
   }
   f->tamanho--;
   return true;
