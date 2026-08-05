@@ -24,8 +24,7 @@ bool esta_vazia(Pilha *p) {
   return false;
 }
 bool push(Pilha *p, int novo_item) {
-  int is_cheia = esta_cheia(p);
-  if (is_cheia == 1) {
+  if (esta_cheia(p)) {
     return false;
   }
   p->estrutura[p->tamanho] = novo_item;
@@ -33,8 +32,7 @@ bool push(Pilha *p, int novo_item) {
   return true;
 }
 bool pop(Pilha *p, int *valor) {
-  int is_vazia = esta_vazia(p);
-  if (is_vazia == 1) {
+  if (esta_vazia(p)) {
     return false;
   }
   p->tamanho--;
