@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdlib.h>
 typedef struct {
   int primeiro;
@@ -11,29 +12,31 @@ void new_fila(Fila *f, int capacidade) {
   f->ultimo = 0;
   f->maxItens = capacidade;
 }
-int esta_cheia(Fila *f) {
+bool esta_cheia(Fila *f) {
   return ((f->ultimo + 1) % f->maxItens) == f->primeiro;
 }
-int esta_vazia(Fila *f) { return f->primeiro == f->ultimo; }
-int push(Fila *f, int novo_item) {
+bool esta_vazia(Fila *f) { return f->primeiro == f->ultimo; }
+bool push(Fila *f, int novo_item) {
   if (esta_cheia(f)) {
-    return -1;
+    return false;
   }
   f->estrutura[f->ultimo] = novo_item;
   f->ultimo = (f->ultimo + 1) % f->maxItens;
-  return 0;
+  return true;
 }
-int pop(Fila *f) {
+bool pop(Fila *f, int *valor) {
   if (esta_vazia(f)) {
-    return -1;
+    return false;
   }
-  int valor = f->estrutura[f->primeiro];
+  *valor = f->estrutura[f->primeiro];
   f->primeiro = (f->primeiro + 1) % f->maxItens;
-  return valor;
+  return true;
 }
-int view(Fila *f) {
+bool view(Fila *f, int *valor) {
   if (esta_vazia(f)) {
-    return -1;
+    return false;
   }
-  return f->estrutura[f->primeiro];
+  *valor = f->estrutura[f->primeiro];
+
+  return true;
 }
