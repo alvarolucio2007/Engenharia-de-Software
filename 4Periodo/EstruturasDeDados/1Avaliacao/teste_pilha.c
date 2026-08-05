@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct {
@@ -10,42 +11,42 @@ void new_pilha(Pilha *p, int capacidade) {
   p->tamanho = 0;
   p->maxItens = capacidade;
 }
-int esta_cheia(
-    Pilha *p) { // Retorna 0 (false) se não estiver cheia, 1 se estiver.
+bool esta_cheia(Pilha *p) {
   if (p->tamanho == p->maxItens) {
-    return 1;
+    return true;
   }
-  return 0;
+  return false;
 }
-int esta_vazia(Pilha *p) {
+bool esta_vazia(Pilha *p) {
   if (p->tamanho == 0) {
-    return 1;
+    return true;
   }
-  return 0;
+  return false;
 }
-int push(Pilha *p, int novo_item) {
+bool push(Pilha *p, int novo_item) {
   int is_cheia = esta_cheia(p);
   if (is_cheia == 1) {
-    return -1;
+    return false;
   }
   p->estrutura[p->tamanho] = novo_item;
   p->tamanho += 1;
-  return 0;
+  return true;
 }
-int pop(Pilha *p) {
+bool pop(Pilha *p, int *valor) {
   int is_vazia = esta_vazia(p);
   if (is_vazia == 1) {
-    return -1;
+    return false;
   }
   p->tamanho--;
-  int popped = p->estrutura[p->tamanho];
-  return popped;
+  *valor = p->estrutura[p->tamanho];
+  return true;
 }
-int view(Pilha *p) {
+bool view(Pilha *p, int *valor) {
   if (esta_vazia(p)) {
-    return -1;
+    return false;
   }
-  return p->estrutura[p->tamanho - 1];
+  *valor = p->estrutura[p->tamanho - 1];
+  return true;
 }
 int qual_tamanho(Pilha *p) { return p->tamanho; }
 void free_pilha(Pilha *p) {
@@ -61,7 +62,9 @@ int main() {
   push(&minha_pilha, 5);
   push(&minha_pilha, 10);
 
-  printf("%d\n", view(&minha_pilha)); // 10
+  int valor;
+  view(&minha_pilha, &valor);
+  printf("%d\n", valor); // 10
 
   free_pilha(&minha_pilha);
   return 0;
