@@ -43,9 +43,10 @@ bool pop_fila_dinamica(FilaDinamica *f, int *saida) {
 }
 int tamanho_fila_dinamica(FilaDinamica *f) { return f->tamanho; }
 
-int view_fila_dinamica(FilaDinamica *f) {
+bool view_fila_dinamica(FilaDinamica *f, int *valor) {
   if (tamanho_fila_dinamica(f) == 0) {
-    return -1;
+    return false;
   }
-  return f->primeiro->dado;
+  *valor = f->primeiro->dado;
+  return true;
 }
