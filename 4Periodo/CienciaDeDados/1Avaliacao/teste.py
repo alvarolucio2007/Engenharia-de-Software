@@ -94,3 +94,8 @@ axes[1].tick_params(axis="x", rotation=45)
 plt.tight_layout()
 plt.savefig("grafico_vendas.png", dpi=150)
 plt.show()
+
+separador()
+print("Salvando arquivo")
+separador()
+df_limpo.to_csv("aula3_base_problema_corrigido.csv", index=False)
