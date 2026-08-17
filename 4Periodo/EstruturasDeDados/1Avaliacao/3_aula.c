@@ -1,5 +1,5 @@
 #include <stdio.h>
-void main() {
+int main() {
   int product_price = 10;
   int new_product_price;
   do {
@@ -8,5 +8,5 @@ void main() {
     scanf("%d", &new_product_price);
   } while (product_price > new_product_price);
   product_price = new_product_price;
-  return;
+  return 0;
 }
