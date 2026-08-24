@@ -11,4 +11,5 @@ int main() {
     soma += vetor_int[i];
   }
   printf("%i", soma);
+  return 0;
 }
