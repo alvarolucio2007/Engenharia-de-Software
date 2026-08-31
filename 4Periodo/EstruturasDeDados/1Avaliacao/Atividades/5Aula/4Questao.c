@@ -65,3 +65,9 @@ int main() {
     imprimir_emprestimo(&emprestimos[i]);
   }
 }
+// Pois Data d é uma struct extremamente pequena e simples (12 bytes), mas
+// imprimir_emprestimo é um ponteiro, pois a struct dele é muito grande (84
+// bytes), portanto utilizar ponteiro (que utiliza apenas 8 bytes) é mais
+// econômico.
+// E é usado e->saida.dia pois a saida não é um ponteiro em si, mas sim um
+// valor, se fosse um ponteiro seria e->saida->dia.
