@@ -60,7 +60,6 @@ int main() {
   Emprestimo emprestimos[3] = {{1, "um", {1, 1, 2001}, {2, 2, 2001}, 10},
                                {2, "dois", {1, 2, 2001}, {2, 3, 2001}, 20},
                                {3, "tres", {1, 2, 2001}, {2, 3, 2001}, 20}};
-  printf("%zu\n", sizeof(Emprestimo));
   for (int i = 0; i < 3; i++) {
     imprimir_emprestimo(&emprestimos[i]);
   }
