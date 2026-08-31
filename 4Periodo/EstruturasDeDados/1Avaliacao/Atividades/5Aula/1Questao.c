@@ -10,11 +10,11 @@ void reajuste(Produto *p) { p->preco = p->preco * 2.0f; }
 int main(void) {
   Produto a;
   a.codigo = 100;
-  strcpy(a.nome, "Teclado");
+  strcpy(a.nome, "Teclado\0");
   a.preco = 80.0f;
   Produto b = a;
   b.codigo = 200;
-  strcpy(b.nome, "Mouse");
+  strcpy(b.nome, "Mouse\0");
   printf("1: %d %s %.2f\n", a.codigo, a.nome, a.preco);
   printf("2: %d %s %.2f\n", b.codigo, b.nome, b.preco);
   promocao(a);
