@@ -35,7 +35,7 @@ VALUES
     (2, '2026-10-15', '2026-10-18', 300.00, 'ATIVA'),
     (3, '2026-11-05', '2026-11-07', 200.00, 'ATIVA');
 SELECT * FROM reservas;
-
+-- Questão 3 e 4
 CREATE OR REPLACE PROCEDURE consultar_hospede(
   v_codigo_hospede INTEGER
 )
@@ -59,7 +59,7 @@ BEGIN
 END;
 $$;
 CALL consultar_hospede(2);
-
+--Questão 5,6 e 7
 CREATE OR REPLACE PROCEDURE criar_reserva(
   v_codigo_hospede INTEGER,
   v_data_checkin DATE,
@@ -79,6 +79,7 @@ END;
 $$;
 
 CALL criar_reserva(1,'09-18-26'::date,'09-19-26'::date,10);
+--Questão 8 e 9
 CREATE OR REPLACE PROCEDURE cancelar_reserva(
   v_id_reserva INTEGER
 )
@@ -98,7 +99,7 @@ $$;
 CALL cancelar_reserva(1);
 SELECT * FROM reservas;
 
-
+--Questão 10
 CREATE OR REPLACE PROCEDURE calcular_valor_reserva(
   v_id_reserva INTEGER
 )
@@ -114,9 +115,9 @@ BEGIN
 END;
 $$;
 CALL calcular_valor_reserva(1);
-
+--Questão 11
 CREATE OR REPLACE PROCEDURE calcular_valor_com_desconto(
-  v_id_reserva INTEGER
+  v_id_reserva INTEGER,
   v_valor_desconto INTEGER
 )
 LANGUAGE plpgsql
