@@ -35,6 +35,34 @@ VALUES
     (2, '2026-10-15', '2026-10-18', 300.00, 'ATIVA'),
     (3, '2026-11-05', '2026-11-07', 200.00, 'ATIVA');
 SELECT * FROM reservas;
+
+-- Questão 1
+CREATE OR REPLACE PROCEDURE cadastrar_hospede(
+  v_nome VARCHAR,
+  v_email VARCHAR,
+  v_telefone VARCHAR
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  INSERT INTO hospedes (nome,email,telefone) VALUES (v_nome,v_email,v_telefone);
+END;
+$$;
+CALL cadastrar_hospede('teste','teste@gmail.com','1234567890');
+
+--Questão 2
+CREATE OR REPLACE PROCEDURE atualizar_telefone_hospede(
+  v_codigo INTEGER,
+  v_telefone VARCHAR
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  UPDATE hospedes SET telefone = v_telefone WHERE id_hospede = v_codigo;
+END;
+$$;
+CALL atualizar_telefone_hospede(1,'0000000000');
+
 -- Questão 3 e 4
 CREATE OR REPLACE PROCEDURE consultar_hospede(
   v_codigo_hospede INTEGER
@@ -53,9 +81,9 @@ BEGIN
     RAISE EXCEPTION 'Hóspede não existe'; 
   END IF;
 
-  RAISE INFO '%',p_nome;
-  RAISE INFO '%',p_email;
-  RAISE INFO '%',p_telefone;
+  RAISE NOTICE '%',p_nome;
+  RAISE NOTICE '%',p_email;
+  RAISE NOTICE '%',p_telefone;
 END;
 $$;
 CALL consultar_hospede(2);
@@ -111,7 +139,7 @@ DECLARE
 BEGIN
   SELECT (data_checkout-data_checkin) INTO quantidade_dias FROM reservas WHERE id_reserva=v_id_reserva;
   SELECT valor_diaria INTO v_valor_diaria FROM reservas WHERE id_reserva = v_id_reserva;
-  RAISE INFO 'Valor total: %', quantidade_dias*v_valor_diaria;
+  RAISE NOTICE 'Valor total: %', quantidade_dias*v_valor_diaria;
 END;
 $$;
 CALL calcular_valor_reserva(1);
@@ -128,7 +156,131 @@ DECLARE
 BEGIN
   SELECT (data_checkout-data_checkin) INTO quantidade_dias FROM reservas WHERE id_reserva=v_id_reserva;
   SELECT valor_diaria INTO v_valor_diaria FROM reservas WHERE id_reserva = v_id_reserva;
-  RAISE INFO 'Valor total: %', quantidade_dias*v_valor_diaria - quantidade_dias*v_valor_diaria*v_valor_desconto/100;
+  RAISE NOTICE 'Valor total: %', quantidade_dias*v_valor_diaria - quantidade_dias*v_valor_diaria*v_valor_desconto/100;
 END;
 $$;
 CALL calcular_valor_com_desconto(1,100);
+--Questão 12
+CREATE OR REPLACE PROCEDURE finalizar_reserva(
+  v_id_reserva INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  v_status VARCHAR;
+  v_valor_total NUMERIC(10,2);
+BEGIN
+  SELECT status, (data_checkout - data_checkin) * valor_diaria 
+  INTO v_status, v_valor_total
+  FROM reservas 
+  WHERE id_reserva = v_id_reserva;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Reserva % não existe', v_id_reserva;
+  END IF;
+  IF v_status != 'ATIVA' THEN
+    RAISE EXCEPTION 'Reserva não está ativa (Status atual: %)', v_status;
+  END IF;
+
+  SELECT (data_checkout - data_checkin) * valor_diaria 
+  INTO v_valor_total
+  FROM reservas 
+  WHERE id_reserva = v_id_reserva;
+
+  RAISE NOTICE 'Valor total: %', v_valor_total;
+
+  UPDATE reservas SET status = 'FINALIZADA' WHERE id_reserva = v_id_reserva;
+  RAISE NOTICE 'Reserva finalizada';
+END;
+$$;
+CALL finalizar_reserva(2);
+
+-- Questão 13
+CREATE OR REPLACE PROCEDURE alterar_valor_diaria(
+  v_id_reserva INTEGER,
+  v_novo_diaria NUMERIC(10,2)
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE 
+  v_status VARCHAR;
+BEGIN
+  SELECT status 
+  INTO v_status
+  FROM reservas 
+  WHERE id_reserva = v_id_reserva;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Reserva % não existe', v_id_reserva;
+  END IF;
+  IF v_status != 'ATIVA' THEN
+    RAISE EXCEPTION 'Reserva não está ativa (Status atual: %)', v_status;
+  END IF;
+  IF v_novo_diaria<0 THEN
+    RAISE EXCEPTION 'Valor novo é menor que 0';
+  END IF;
+  UPDATE reservas SET valor_diaria = v_novo_diaria WHERE id_reserva = v_id_reserva;
+  RAISE NOTICE 'Reserva atualizada';
+END;
+$$;
+--Questão 14
+CREATE OR REPLACE PROCEDURE reabrir_reserva(
+  v_id_reserva INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  SELECT status 
+  FROM reservas 
+  WHERE id_reserva = v_id_reserva;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Reserva % não existe', v_id_reserva;
+  END IF;
+  IF v_status!='CANCELADA' THEN
+    RAISE EXCEPTION 'Reserva não está com status cancelada, mas sim com status %',v_status;
+  END IF;
+  UPDATE reservas SET v_status = 'ATIVA' WHERE id_reserva = v_id_reserva;
+  RAISE NOTICE 'Reserva reaberta';
+END;
+$$;
+--Questão 15
+CREATE OR REPLACE PROCEDURE confirmar_reserva(
+  v_id_reserva INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  v_status VARCHAR;
+  v_id_hospede INTEGER;
+  v_diferenca_datas INTEGER;
+  v_data_checkin DATE;
+  v_data_checkout DATE;
+  v_valor_diaria NUMERIC;
+BEGIN
+  SELECT status,id_hospede INTO v_status,v_id_hospede FROM reservas
+  WHERE id_reserva = v_id_reserva;
+  IF NOT FOUND THEN 
+    RAISE EXCEPTION 'Reserva % não existe',v_id_reserva;
+  END IF;
+  PERFORM id_hospede FROM hospedes
+  WHERE id_hospede=v_id_hospede;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Hóspede % não existe',v_id_hospede;
+  END IF;
+  IF v_status != 'ATIVA' THEN
+    RAISE EXCEPTION 'Reserva % não está ativa',v_id_reserva;
+  END IF;
+  SELECT (data_checkout-data_checkin) INTO v_diferenca_datas FROM reservas WHERE id_reserva=v_id_reserva;
+  IF v_diferenca_datas < 0 THEN
+    RAISE EXCEPTION 'Datas inválidas, data checkout é antes de data_checkin';
+  END IF;
+  SELECT valor_diaria INTO v_valor_diaria FROM reservas WHERE id_reserva=v_id_reserva;
+  IF v_valor_diaria < 0  THEN
+    RAISE EXCEPTION 'Valor da diária inválida, tem que ser maior que 0';
+  END IF;
+
+  RAISE NOTICE 'ID Reserva: % | Hóspede: %', v_id_reserva, v_id_hospede;
+  RAISE NOTICE 'Período: % dias', v_diferenca_datas;
+  RAISE NOTICE 'Valor total: R$ %', (v_diferenca_datas * v_valor_diaria);
+  UPDATE reservas SET status = 'ATIVA' WHERE id_reserva = v_id_reserva;
+END;
+$$;
+CALL confirmar_reserva(3);
