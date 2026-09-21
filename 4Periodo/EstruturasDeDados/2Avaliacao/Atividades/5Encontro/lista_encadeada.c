@@ -42,7 +42,7 @@ int remover(Lista *l, int valor) {
   No *atual = l->inicio;
   No *anterior = NULL;
 
-  while (atual != NULL & atual->dado != valor) {
+  while (atual != NULL && atual->dado != valor) {
     anterior = atual;
     atual = atual->prox;
   }
