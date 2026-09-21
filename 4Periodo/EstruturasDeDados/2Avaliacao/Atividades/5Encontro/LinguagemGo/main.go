@@ -1,4 +1,4 @@
-package encontro
+package main
 
 import "errors"
 
@@ -11,14 +11,12 @@ type ListaEncadeada struct {
 	fim    *Node
 }
 
-func (l *ListaEncadeada) inserir_inicio(dado int) {
-	var primeiro *Node
-	primeiro.dado = dado
-	primeiro.proximo = l.inicio
+func (l *ListaEncadeada) InserirInicio(dado int) {
+	primeiro := &Node{dado: dado, proximo: l.inicio}
 	l.inicio = primeiro
 }
 
-func (l *ListaEncadeada) inserir_fim(dado int) {
+func (l *ListaEncadeada) InserirFim(dado int) {
 	if l == nil {
 		return
 	}
@@ -38,7 +36,7 @@ var (
 	ErrElementNotFound = errors.New("element was not found")
 )
 
-func (l *ListaEncadeada) remover(valor int) error {
+func (l *ListaEncadeada) Remover(valor int) error {
 	if l == nil || l.inicio == nil {
 		return ErrListNotFound
 	}

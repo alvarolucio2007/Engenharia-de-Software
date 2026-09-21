@@ -1,3 +1,5 @@
+// go:build ignore
+
 #include <stdlib.h>
 typedef struct No {
   int dado;
