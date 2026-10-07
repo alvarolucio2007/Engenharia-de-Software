@@ -22,10 +22,11 @@ void inserir_fim(ListaDupla *l, int dado) {
     ultimo->ant = NULL;
     l->inicio = ultimo;
     l->fim = ultimo;
+  } else {
+    ultimo->ant = l->fim;
+    l->fim->prox = ultimo;
+    l->fim = ultimo;
   }
-  ultimo->ant = l->fim;
-  l->fim->prox = ultimo;
-  l->fim = ultimo;
 }
 void remover(ListaDupla *l, No *alvo) {
   if (l->inicio == alvo) {
