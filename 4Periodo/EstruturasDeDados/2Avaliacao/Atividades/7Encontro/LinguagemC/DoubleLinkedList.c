@@ -39,6 +39,7 @@ void remover(ListaDupla *l, No *alvo) {
       l->fim = NULL;
     }
     free(temp);
+    return;
   }
   if (l->fim == alvo) {
     No *temp = l->fim;
@@ -49,7 +50,7 @@ void remover(ListaDupla *l, No *alvo) {
       l->inicio = NULL;
       l->fim = NULL;
     }
-    free(l->fim);
+    free(temp);
     return;
   }
   alvo->ant->prox = alvo->prox;
